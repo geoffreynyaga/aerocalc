@@ -49,7 +49,7 @@ Convert between various units.
 """
 
 try:
-    from default_units import *
+    from .default_units import *
 except ImportError:
     default_area_units = 'ft**2'
     default_power_units = 'hp'
@@ -105,8 +105,7 @@ def area_conv(A, from_units=default_area_units,
     elif from_units == 'nm**2':
         A *= (1852 / 0.3048) ** 2
     else:
-        raise ValueError, \
-            'from_units must be "ft**2" or "in**2" or "m**2" or "km**2" or "sm**2" (square statute miles) or "nm**2" (square nautical miles).'
+        raise ValueError('from_units must be "ft**2" or "in**2" or "m**2" or "km**2" or "sm**2" (square statute miles) or "nm**2" (square nautical miles).')
 
     if to_units == 'ft**2':
         return A
@@ -121,8 +120,7 @@ def area_conv(A, from_units=default_area_units,
     elif to_units == 'nm**2':
         return A * (0.3048 / 1852) ** 2
     else:
-        raise ValueError, \
-            'from_units must be "ft**2" or "in**2" or "m**2" or "km**2" or "sm**2" (square statute miles) or "nm**2" (square nautical miles).'
+        raise ValueError('from_units must be "ft**2" or "in**2" or "m**2" or "km**2" or "sm**2" (square statute miles) or "nm**2" (square nautical miles).')
 
 
 def density_conv(D, from_units, to_units):
@@ -150,8 +148,7 @@ def density_conv(D, from_units, to_units):
     elif from_units == 'lb/ft**3':
         D *= 16.018463
     else:
-        raise ValueError, \
-            'from_units must be one of "kg/m**3", "slug/ft**3" and "lb/ft**3".'
+        raise ValueError('from_units must be one of "kg/m**3", "slug/ft**3" and "lb/ft**3".')
 
     if to_units == 'kg/m**3':
         return D
@@ -160,8 +157,7 @@ def density_conv(D, from_units, to_units):
     elif to_units == 'lb/ft**3':
         return D / 16.018463
     else:
-        raise ValueError, \
-            'to_units must be one of "kg/m**3", "slug/ft**3" and "lb/ft**3".'
+        raise ValueError('to_units must be one of "kg/m**3", "slug/ft**3" and "lb/ft**3".')
 
 
 def force_conv(F, from_units=default_weight_units,
@@ -178,14 +174,14 @@ def force_conv(F, from_units=default_weight_units,
     elif from_units == 'lb':
         F *= 4.4482216
     else:
-        raise ValueError, 'from_units must be one of "lb" or "N".'
+        raise ValueError('from_units must be one of "lb" or "N".')
 
     if to_units == 'N':
         pass
     elif to_units == 'lb':
         F /= 4.4482216
     else:
-        raise ValueError, 'to_units must be one of "lb" or "N".'
+        raise ValueError('to_units must be one of "lb" or "N".')
 
     return F
 
@@ -230,8 +226,7 @@ def len_conv(L, from_units=default_length_units,
     elif from_units == 'in':
         L /= 12.
     else:
-        raise ValueError, \
-            'from_units must be "ft", "in", "m", "km", "sm" (statute miles) or "nm" (nautical miles).'
+        raise ValueError('from_units must be "ft", "in", "m", "km", "sm" (statute miles) or "nm" (nautical miles).')
 
     if to_units == 'ft':
         return L
@@ -246,8 +241,7 @@ def len_conv(L, from_units=default_length_units,
     elif to_units == 'in':
         return L * 12.
     else:
-        raise ValueError, \
-            'from_units must be "ft", "in", "m", "km", "sm" (statute miles) or "nm" (nautical miles).'
+        raise ValueError('from_units must be "ft", "in", "m", "km", "sm" (statute miles) or "nm" (nautical miles).')
 
 
 def power_conv(P, from_units=default_power_units,
@@ -277,8 +271,7 @@ def power_conv(P, from_units=default_power_units,
     # elif from_units == 'BTU/mn':
     #     P /= 42.407227
     else:
-        raise ValueError, \
-            'from_units must be "hp", "ft-lb/mn", "ft-lb/s", "W" (watts), "kW" (kilowatts), "BTU/hr", or "BTU/mn".'
+        raise ValueError('from_units must be "hp", "ft-lb/mn", "ft-lb/s", "W" (watts), "kW" (kilowatts), "BTU/hr", or "BTU/mn".')
 
     if to_units == 'hp':
         return P
@@ -295,8 +288,7 @@ def power_conv(P, from_units=default_power_units,
     # elif to_units == 'BTU/mn':
     #     return P * 42.407227
     else:
-        raise ValueError, \
-        'to_units must be "hp", "ft-lb/mn", "ft-lb/s", "W" (watts), "kW" (kilowatts), "BTU/hr", or "BTU/mn".'
+        raise ValueError('to_units must be "hp", "ft-lb/mn", "ft-lb/s", "W" (watts), "kW" (kilowatts), "BTU/hr", or "BTU/mn".')
 
 
 def press_conv(P, from_units=default_press_units,
@@ -339,8 +331,7 @@ def press_conv(P, from_units=default_press_units,
     elif from_units == 'pa':
         pass
     else:
-        raise ValueError, \
-            'from_units must be "in HG", "mm HG", "psi", "psf" (lb per sq. ft), "hpa", "mb" or "pa".'
+        raise ValueError('from_units must be "in HG", "mm HG", "psi", "psf" (lb per sq. ft), "hpa", "mb" or "pa".')
 
     if to_units == 'in HG':
         return P / 3386.38
@@ -355,8 +346,7 @@ def press_conv(P, from_units=default_press_units,
     elif to_units == 'pa':
         return P
     else:
-        raise ValueError, \
-            'to_units must be "in HG", "mm HG", "psi", "psf" (lb per sq. ft), "pa", "hpa" or "mb".'
+        raise ValueError('to_units must be "in HG", "mm HG", "psi", "psf" (lb per sq. ft), "pa", "hpa" or "mb".')
 
 
 def speed_conv(S, from_units=default_speed_units,
@@ -389,8 +379,7 @@ def speed_conv(S, from_units=default_speed_units,
         S *= len_conv(1, from_units=default_length_units, to_units='nm')\
              * 3600.
     else:
-        raise ValueError, \
-            'from_units must be one of "kt", "mph", "km/h", "m/s" and "ft/s".'
+        raise ValueError('from_units must be one of "kt", "mph", "km/h", "m/s" and "ft/s".')
 
     if to_units == 'kt':
         return S
@@ -407,8 +396,7 @@ def speed_conv(S, from_units=default_speed_units,
         S *= len_conv(1, from_units='nm', to_units=default_length_units)
         return S / 3600.
     else:
-        raise ValueError, \
-            'to_units must be one of "kt", "mph", "km/h", "m/s" and "ft/s".'
+        raise ValueError('to_units must be one of "kt", "mph", "km/h", "m/s" and "ft/s".')
 
 
 def temp_conv(T, from_units=default_temp_units,
@@ -448,8 +436,7 @@ def temp_conv(T, from_units=default_temp_units,
     elif from_units == 'R':
         T *= 5. / 9.
     else:
-        raise ValueError, \
-            'from_units must be one of "C", "F", "K" or "R".'
+        raise ValueError('from_units must be one of "C", "F", "K" or "R".')
 
     if to_units == 'C':
         return T - 273.15
@@ -460,8 +447,7 @@ def temp_conv(T, from_units=default_temp_units,
     elif to_units == 'R':
         return T * 1.8
     else:
-        raise ValueError, \
-            'to_units must be one of "C", "F", "K" or "R".'
+        raise ValueError('to_units must be one of "C", "F", "K" or "R".')
 
 
 def vol_conv(V, from_units=default_vol_units,
@@ -511,8 +497,7 @@ def vol_conv(V, from_units=default_vol_units,
     elif from_units == 'l':
         V /= 3.048 ** 3
     else:
-        raise ValueError, \
-            'from_units must be "ft**3", "in**3", "USG", "ImpGal", "l", "m**3", "km**3", "sm**3" (cubic statute miles) or "nm**3" (cubic nautical miles).'
+        raise ValueError('from_units must be "ft**3", "in**3", "USG", "ImpGal", "l", "m**3", "km**3", "sm**3" (cubic statute miles) or "nm**3" (cubic nautical miles).')
 
     if to_units == 'ft**3':
         return V
@@ -533,8 +518,7 @@ def vol_conv(V, from_units=default_vol_units,
     elif to_units == 'l':
         return V * 3.048 ** 3
     else:
-        raise ValueError, \
-            'to_units must be "ft**3", "in**3", "USG", "ImpGal", "l", "m**3", "km**3", "sm**3" (cubic statute miles) or "nm**3" (cubic nautical miles).'
+        raise ValueError('to_units must be "ft**3", "in**3", "USG", "ImpGal", "l", "m**3", "km**3", "sm**3" (cubic statute miles) or "nm**3" (cubic nautical miles).')
 
 
 def wt_conv(W, from_units=default_weight_units,
@@ -558,14 +542,14 @@ def wt_conv(W, from_units=default_weight_units,
     elif from_units == 'lb':
         W *= 0.453592
     else:
-        raise ValueError, 'from_units must be one of "lb" or "kg".'
+        raise ValueError('from_units must be one of "lb" or "kg".')
 
     if to_units == 'kg':
         pass
     elif to_units == 'lb':
         W *= 2.204622622
     else:
-        raise ValueError, 'to_units must be one of "lb" or "kg".'
+        raise ValueError('to_units must be one of "lb" or "kg".')
 
     return W
 
@@ -649,8 +633,7 @@ def avgas_conv(
     elif str(grade) == '80':
         grade_density = 5.7583
     else:
-        raise ValueError, \
-            'grade must be one of "nominal", "80", "100" or "100LL", with a default of "100LL"'
+        raise ValueError('grade must be one of "nominal", "80", "100" or "100LL", with a default of "100LL"')
 
     # Correct the density if the grade is other than nominal.
     # If the grade actually is nominal, we are multiplying by 1 / 1
@@ -668,8 +651,7 @@ def avgas_conv(
     elif from_units == 'l':
         AG *= vol_conv(lb_per_USG, from_units='l', to_units='USG')
     else:
-        raise ValueError, \
-            'from_units must be one of "lb", "USG", "Imp Gal", "l", or "kg".'
+        raise ValueError('from_units must be one of "lb", "USG", "Imp Gal", "l", or "kg".')
 
     if to_units == 'lb':
         pass
@@ -682,8 +664,7 @@ def avgas_conv(
     elif to_units == 'l':
         AG /= vol_conv(lb_per_USG, from_units='l', to_units='USG')
     else:
-        raise ValueError, \
-            'from_units must be one of "lb", "USG", "Imp Gal", "l", or "kg".'
+        raise ValueError('from_units must be one of "lb", "USG", "Imp Gal", "l", or "kg".')
 
     return AG
 
