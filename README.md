@@ -17,7 +17,7 @@ Download the files https://github.com/chengdi123000/aerocalc/archive/v0.11-py3.t
 ```bash
 wget https://github.com/chengdi123000/aerocalc/archive/v0.11-py3.tar.gz
 tar xf v0.11-py3.tar.gz
-cd v0.11-py3
+cd aerocalc-0.11-py3
 python setup.py install
 
 ```
