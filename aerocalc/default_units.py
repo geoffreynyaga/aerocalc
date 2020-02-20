@@ -42,15 +42,15 @@
 Defines the default units to be used for various modules.
 """
 
-default_area_units = 'ft**2'
-default_avgas_units = 'lb'
-default_density_units = 'lb/ft**3'
-default_length_units = 'ft'
-default_power_units = 'hp'
-default_press_units = 'in HG'
-default_speed_units = 'kt'
-default_temp_units = 'C'
-default_weight_units = 'lb'
-default_vol_units = 'ft**3'
+default_area_units = "ft**2"
+default_avgas_units = "lb"
+default_density_units = "lb/ft**3"
+default_length_units = "ft"
+default_power_units = "hp"
+default_press_units = "in HG"
+default_speed_units = "kt"
+default_temp_units = "C"
+default_weight_units = "lb"
+default_vol_units = "ft**3"
 
 default_alt_units = default_length_units

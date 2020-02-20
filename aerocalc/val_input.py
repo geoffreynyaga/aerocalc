@@ -65,21 +65,14 @@ Validate user input against arbitrary criteria.  Used in the interactive interfa
 """
 
 
-def get_input(
-    prompt,
-    type,
-    error_string,
-    check_list=[],
-    default='',
-    **kwds
-    ):
+def get_input(prompt, type, error_string, check_list=[], default="", **kwds):
     """
     Return user input after validating it.
     """
 
     input_validated = False
 
-    if type == 'float':
+    if type == "float":
         while not input_validated:
             input_data = input(prompt)
             try:
@@ -88,7 +81,7 @@ def get_input(
             except ValueError:
                 print(error_string)
 
-    if type == 'float+':
+    if type == "float+":
 
         # data is a positive float
 
@@ -101,13 +94,13 @@ def get_input(
                 input_validated = True
         except ValueError:
             print(error_string)
-    elif type == 'float_or_blank':
+    elif type == "float_or_blank":
 
         # data is a float or blank
 
         while not input_validated:
             input_data = input(prompt)
-            if input_data == '':
+            if input_data == "":
                 input_data = default
                 input_validated = True
             else:
@@ -116,16 +109,16 @@ def get_input(
                     input_validated = True
                 except ValueError:
                     print(error_string)
-    elif type == 'float_str_or_blank':
+    elif type == "float_str_or_blank":
 
         # data is a float, a string in kwds['str_list'] or blank
 
         while not input_validated:
             input_data = input(prompt)
-            if input_data == '':
+            if input_data == "":
                 input_data = default
                 input_validated = True
-            elif input_data in kwds['str_list']:
+            elif input_data in kwds["str_list"]:
                 input_validated = True
             else:
                 try:
@@ -133,13 +126,13 @@ def get_input(
                     input_validated = True
                 except ValueError:
                     print(error_string)
-    elif type == 'float+_or_blank':
+    elif type == "float+_or_blank":
 
         # data is a float, >= 0, or blank
 
         while not input_validated:
             input_data = input(prompt)
-            if input_data == '':
+            if input_data == "":
                 input_data = default
                 input_validated = True
                 return input_data
@@ -152,7 +145,7 @@ def get_input(
             except ValueError:
                 print(error_string)
 
-    if type == 'int':
+    if type == "int":
         while 1:
             input_data = input(prompt)
             try:
@@ -161,35 +154,33 @@ def get_input(
             except ValueError:
                 print(error_string)
 
-    if type == 'int_or_str':
+    if type == "int_or_str":
 
         # data is an int or a string in kwds['str_list']
 
         while 1:
             input_data = input(prompt)
-            if input_data in kwds['str_list']:
+            if input_data in kwds["str_list"]:
                 break
             try:
                 input_data = int(input_data)
                 try:
-                    if input_data < kwds['min']:
-                        print('You must enter an integer no less than', \
-                            kwds['min'])
+                    if input_data < kwds["min"]:
+                        print("You must enter an integer no less than", kwds["min"])
                 except KeyError:
                     pass
                 try:
-                    if input_data > kwds['max']:
-                        print('You must enter an integer less than', \
-                            kwds['max'])
+                    if input_data > kwds["max"]:
+                        print("You must enter an integer less than", kwds["max"])
                 except KeyError:
                     break
             except ValueError:
-                print('You must enter an integer')
-    elif type == 'list':
+                print("You must enter an integer")
+    elif type == "list":
 
         while not input_validated:
             input_data = input(prompt)
-            if input_data == '':
+            if input_data == "":
                 input_data = default
                 input_validated = True
                 return default
@@ -202,40 +193,37 @@ def get_input(
 
 
 def get_input2(
-    prompt,
-    conditions_any=[],
-    conditions_all=[],
-    debug=False,
-    ):
+    prompt, conditions_any=[], conditions_all=[], debug=False,
+):
     """Return user input, after validating it against arbitrary criteria.
-    
+
     The user input must satisfy all conditions in conditions_all, and one or
     more of the conditions in conditions_any.  Conditions_any is a list, with
     the first item the error string to display if none of the conditions are
-    met.  Conditions_all is a list of tuples, with each tuple having one 
+    met.  Conditions_all is a list of tuples, with each tuple having one
     condition + the associated error string to display to the user if the
     condition is not met.
-    
+
     The conditions will be inserted in 'if' statements, and must be written
     so that the 'if' statement will be true if the data is valid.  E.g.
-    
+
     if a 'Q' is needed:
     'X == \"Q\"'
 
     Note 1: all data input by the user is seen as a string, even if numbers are
     entered.  If the test is looking for an integer, write it as:
     'int(X)'
-    
+
     Note 2: All tests are run inside 'try' statements, so exceptions will not
     cause problems.  Any test that raises an exception is treated as a failed
     test.
-    
+
     Note 3: One idiosyncrasy of 'if' statements is that any statement that
     returns a \"0\" is treated as a False.  Tests must be crafted so a pass
     does not return a '0'.  E.g., if the test is intended to check that the
     data is a float, and a zero would be valid data, do not write the test as:
     'float(X)', as 'if float(\"0\"):' will not pass.
-    
+
     """
 
     input_validated = False
@@ -251,18 +239,18 @@ def get_input2(
             error_string = conditions_any[0]
             for condition in conditions_any[1:]:
                 if debug:
-                    print('Testing condition', condition)
+                    print("Testing condition", condition)
                 try:
                     if eval(condition):
                         validated_any = True
                         if debug:
-                            print('Test of ', condition, 'passed')
+                            print("Test of ", condition, "passed")
                     else:
                         if debug:
-                            print('Test of ', condition, 'failed')
+                            print("Test of ", condition, "failed")
                 except:
                     if debug:
-                        print('Exception during test')
+                        print("Exception during test")
                     pass
 
         # does input meet all conditions in conditions_all?
@@ -270,27 +258,25 @@ def get_input2(
         if len(conditions_all) > 0:
             for condition in conditions_all:
                 if debug:
-                    print('Testing condition', condition[0])
+                    print("Testing condition", condition[0])
                 try:
                     if eval(condition[0]):
                         if debug:
-                            print('Test of ', condition[0], 'passed')
+                            print("Test of ", condition[0], "passed")
                         pass
                     else:
                         if debug:
-                            print('Test of ', condition[0], 'failed')
+                            print("Test of ", condition[0], "failed")
                         validated_all = False
                         print(condition[1])
                 except:
                     if debug:
-                        print('Exception during test')
+                        print("Exception during test")
                     validated_all = False
                     print(condition[1])
 
         if not validated_any:
-            print(error_string, '\n')
+            print(error_string, "\n")
         elif validated_all:
             input_validated = True
     return X
-
-

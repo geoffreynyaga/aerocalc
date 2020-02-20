@@ -50,7 +50,7 @@ This package contains the following modules:
 
 airspeed  -       airspeed conversions and calculations.  Provides interactive
                   mode when run directly, e.g. 'python airspeed.py'
-default_units -   defines default units to be used by all modules.  May be 
+default_units -   defines default units to be used by all modules.  May be
                   overridden by a user units file.
 ssec -            static source error correction calculations
 std_atm -         standard atmosphere parametres and calculations
@@ -62,5 +62,5 @@ Author: Kevin Horton
 E-mail: kevin01 -at- kilohotel.com
 """
 
-VERSION = '0.11'
+VERSION = "0.11"
 
