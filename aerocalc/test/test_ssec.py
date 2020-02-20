@@ -12,9 +12,8 @@ import sys
 
 # It is assumed that ssec.py is in the directory directly above
 
-sys.path.append('../')
-import ssec as SS
-
+sys.path.append("../")
+from .. import ssec as SS
 
 
 def RE(value, truth):
@@ -25,7 +24,6 @@ def RE(value, truth):
 
 
 class Test_gps2tas(unittest.TestCase):
-
     def test_01(self):
 
         # three legs, returning TAS only
@@ -45,7 +43,6 @@ class Test_gps2tas(unittest.TestCase):
         self.assertTrue(RE(TAS, TAS_Truth) <= 1e-4)
         self.assertTrue(RE(WS, WS_Truth) <= 1e-3)
         self.assertTrue(RE(Dir, Dir_Truth) <= 1e-4)
-
 
         # four legs, returning TAS only
 
@@ -83,7 +80,7 @@ class Test_gps2tas(unittest.TestCase):
 
         # four legs, returning TAS and standard deviation
 
-        (TAS, SD) =SS.gps2tas([178, 185, 188, 184], [178, 82, 355, 265], 1)
+        (TAS, SD) = SS.gps2tas([178, 185, 188, 184], [178, 82, 355, 265], 1)
         TAS_Truth = 183.73
         SD_Truth = 0.827
         self.assertTrue(RE(TAS, TAS_Truth) <= 1e-4)
@@ -93,7 +90,9 @@ class Test_gps2tas(unittest.TestCase):
 
         # four legs, returning TAS, standard deviation and four calculated winds
 
-        (TAS, SD, ((W0, D0), (W1, D1), (W2, D2), (W3, D3))) = SS.gps2tas([178, 185, 188, 184], [178, 82, 355, 265], 2)
+        (TAS, SD, ((W0, D0), (W1, D1), (W2, D2), (W3, D3))) = SS.gps2tas(
+            [178, 185, 188, 184], [178, 82, 355, 265], 2
+        )
         TAS_Truth = 183.73
         SD_Truth = 0.827
         W0_T, D0_T = 5.26, 194.52
@@ -153,6 +152,5 @@ main_suite.addTest(suite1)
 # main_suite.addTest(suite16)
 # main_suite.addTest(suite17)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.TextTestRunner(verbosity=2).run(main_suite)
-

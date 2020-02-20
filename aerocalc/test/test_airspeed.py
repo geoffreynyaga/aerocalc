@@ -10,8 +10,8 @@ import sys
 
 # sys.path.append('/Users/kwh/python/')
 
-sys.path.append('../')
-import airspeed as A
+sys.path.append("../")
+from .. import airspeed as A
 
 # These tests assume that default_units.py contains the following defaults:
 # default_area_units = 'ft**2'
@@ -34,13 +34,12 @@ def RE(value, truth):
 
 
 class Test_cas2dp(unittest.TestCase):
-
     def test_01(self):
 
         # 100 kt to lb/ft**3
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(100, press_units='psf')
+        Value = A.cas2dp(100, press_units="psf")
         Truth = 34.0493
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -49,7 +48,7 @@ class Test_cas2dp(unittest.TestCase):
         # 600 kt to lb/ft**3
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(700, press_units='psf', speed_units='mph')
+        Value = A.cas2dp(700, press_units="psf", speed_units="mph")
         Truth = 1540.37
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -58,7 +57,7 @@ class Test_cas2dp(unittest.TestCase):
         # 300 mph to in HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(300, press_units='in HG', speed_units='mph')
+        Value = A.cas2dp(300, press_units="in HG", speed_units="mph")
         Truth = 3.38145
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -67,8 +66,8 @@ class Test_cas2dp(unittest.TestCase):
         # 300 mph to in HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(55, press_units='in HG', speed_units='kt')
-        Truth = .145052
+        Value = A.cas2dp(55, press_units="in HG", speed_units="kt")
+        Truth = 0.145052
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_05(self):
@@ -76,7 +75,7 @@ class Test_cas2dp(unittest.TestCase):
         # 300 km/h to mm HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(300, press_units='mm HG', speed_units='km/h')
+        Value = A.cas2dp(300, press_units="mm HG", speed_units="km/h")
         Truth = 32.385
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -85,7 +84,7 @@ class Test_cas2dp(unittest.TestCase):
         # 299 km/h to pa
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(299, press_units='pa', speed_units='km/h')
+        Value = A.cas2dp(299, press_units="pa", speed_units="km/h")
         Truth = 4288.5
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -94,7 +93,7 @@ class Test_cas2dp(unittest.TestCase):
         # 280 kt to mm HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(280, press_units='mm HG')
+        Value = A.cas2dp(280, press_units="mm HG")
         Truth = 99.671
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -103,7 +102,7 @@ class Test_cas2dp(unittest.TestCase):
         # 244 kt to pa
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(244, press_units='pa')
+        Value = A.cas2dp(244, press_units="pa")
         Truth = 9983.7
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -112,7 +111,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1000 mph to in HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1000, press_units='in HG', speed_units='mph')
+        Value = A.cas2dp(1000, press_units="in HG", speed_units="mph")
         Truth = 52.5970
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -121,7 +120,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1000 mph to psf
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1000, press_units='psf', speed_units='mph')
+        Value = A.cas2dp(1000, press_units="psf", speed_units="mph")
         Truth = 3719.98
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -130,7 +129,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1000 kt to in HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1000, press_units='in HG')
+        Value = A.cas2dp(1000, press_units="in HG")
         Truth = 73.5454
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -139,7 +138,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1000 kt to psf
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1000, press_units='psf')
+        Value = A.cas2dp(1000, press_units="psf")
         Truth = 5201.59
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -148,7 +147,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1700 km/h to mm HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1700, press_units='mm HG', speed_units='km/h')
+        Value = A.cas2dp(1700, press_units="mm HG", speed_units="km/h")
         Truth = 1524.86
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -157,7 +156,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1700 km/h to pa
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1700, press_units='pa', speed_units='km/h')
+        Value = A.cas2dp(1700, press_units="pa", speed_units="km/h")
         Truth = 203298
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -166,7 +165,7 @@ class Test_cas2dp(unittest.TestCase):
         # 1000 kt to mm HG
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1000, press_units='mm HG')
+        Value = A.cas2dp(1000, press_units="mm HG")
         Truth = 1868.05
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
@@ -175,19 +174,18 @@ class Test_cas2dp(unittest.TestCase):
         # 1000 kt to pa
         # truth value from NASA RP 1046
 
-        Value = A.cas2dp(1000, press_units='pa')
+        Value = A.cas2dp(1000, press_units="pa")
         Truth = 249053
         self.assertTrue(RE(Value, Truth) <= 2e-5)
 
 
 class Test_dp2cas(unittest.TestCase):
-
     def test_01(self):
 
         # 100 kt in lb/ft**3
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(34.0493, press_units='psf')
+        Value = A.dp2cas(34.0493, press_units="psf")
         Truth = 100
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -196,7 +194,7 @@ class Test_dp2cas(unittest.TestCase):
         # 700 mph in lb/ft**3
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(1540.37, press_units='psf', speed_units='mph')
+        Value = A.dp2cas(1540.37, press_units="psf", speed_units="mph")
         Truth = 700
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -205,8 +203,7 @@ class Test_dp2cas(unittest.TestCase):
         # 300 mph in in HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(3.38145, press_units='in HG', speed_units='mph'
-                         )
+        Value = A.dp2cas(3.38145, press_units="in HG", speed_units="mph")
         Truth = 300
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -215,7 +212,7 @@ class Test_dp2cas(unittest.TestCase):
         # 55 kt in in HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(.145052, press_units='in HG', speed_units='kt')
+        Value = A.dp2cas(0.145052, press_units="in HG", speed_units="kt")
         Truth = 55
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -224,8 +221,7 @@ class Test_dp2cas(unittest.TestCase):
         # 300 km/h in mm HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(32.385, press_units='mm HG', speed_units='km/h'
-                         )
+        Value = A.dp2cas(32.385, press_units="mm HG", speed_units="km/h")
         Truth = 300
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -234,7 +230,7 @@ class Test_dp2cas(unittest.TestCase):
         # 299 km/h in pa
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(4288.5, press_units='pa', speed_units='km/h')
+        Value = A.dp2cas(4288.5, press_units="pa", speed_units="km/h")
         Truth = 299
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -243,7 +239,7 @@ class Test_dp2cas(unittest.TestCase):
         # 280 kt in mm HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(99.671, press_units='mm HG')
+        Value = A.dp2cas(99.671, press_units="mm HG")
         Truth = 280
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -252,21 +248,21 @@ class Test_dp2cas(unittest.TestCase):
         # 244 kt in pa
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(9983.7, press_units='pa')
+        Value = A.dp2cas(9983.7, press_units="pa")
         Truth = 244
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
-# ....def test_09(self):
-# ........# check out of range on airspeed too high
-# ........# truth value from NASA RP 1046
-# ........self.assertRaises(ValueError, A.dp2cas, 1889.51, speed_units = 'mph', press_units = 'psf')
+    # ....def test_09(self):
+    # ........# check out of range on airspeed too high
+    # ........# truth value from NASA RP 1046
+    # ........self.assertRaises(ValueError, A.dp2cas, 1889.51, speed_units = 'mph', press_units = 'psf')
 
     def test_09(self):
 
         # 1000 kt in lb/ft**3
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(5201.59, press_units='psf')
+        Value = A.dp2cas(5201.59, press_units="psf")
         Truth = 1000
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -275,7 +271,7 @@ class Test_dp2cas(unittest.TestCase):
         # 1100 mph in lb/ft**3
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(4676.47, press_units='psf', speed_units='mph')
+        Value = A.dp2cas(4676.47, press_units="psf", speed_units="mph")
         Truth = 1100
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -284,8 +280,7 @@ class Test_dp2cas(unittest.TestCase):
         # 1100 mph in in HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(66.1208, press_units='in HG', speed_units='mph'
-                         )
+        Value = A.dp2cas(66.1208, press_units="in HG", speed_units="mph")
         Truth = 1100
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -294,7 +289,7 @@ class Test_dp2cas(unittest.TestCase):
         # 1000 kt in in HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(73.5454, press_units='in HG', speed_units='kt')
+        Value = A.dp2cas(73.5454, press_units="in HG", speed_units="kt")
         Truth = 1000
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -303,8 +298,7 @@ class Test_dp2cas(unittest.TestCase):
         # 1700 km/h in mm HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(1524.86, press_units='mm HG',
-                         speed_units='km/h')
+        Value = A.dp2cas(1524.86, press_units="mm HG", speed_units="km/h")
         Truth = 1700
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -313,7 +307,7 @@ class Test_dp2cas(unittest.TestCase):
         # 1700 km/h in pa
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(203298, press_units='pa', speed_units='km/h')
+        Value = A.dp2cas(203298, press_units="pa", speed_units="km/h")
         Truth = 1700
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -322,7 +316,7 @@ class Test_dp2cas(unittest.TestCase):
         # 1000 kt in mm HG
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(1868.05, press_units='mm HG')
+        Value = A.dp2cas(1868.05, press_units="mm HG")
         Truth = 1000
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -331,13 +325,12 @@ class Test_dp2cas(unittest.TestCase):
         # 1000 kt in pa
         # truth value from NASA RP 1046
 
-        Value = A.dp2cas(249053, press_units='pa')
+        Value = A.dp2cas(249053, press_units="pa")
         Truth = 1000
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
 
 class Test_cas2tas(unittest.TestCase):
-
     def test_01(self):
 
         # 400 kt at 30000, std temp
@@ -352,13 +345,12 @@ class Test_cas2tas(unittest.TestCase):
         # 400 kt at 30000, temp -70 deg F
         # truth value from NASA RP 1046 + correction for non-standard temp
 
-        Value = A.cas2tas(400, 30000, -70, temp_units='F')
+        Value = A.cas2tas(400, 30000, -70, temp_units="F")
         Truth = 586.266
         self.assertTrue(RE(Value, Truth) <= 3e-5)
 
 
 class Test_tas2cas(unittest.TestCase):
-
     def test_01(self):
 
         # 400 kt at 30000, std temp
@@ -373,27 +365,26 @@ class Test_tas2cas(unittest.TestCase):
         # 400 kt at 30000, temp -70 deg F
         # truth value from NASA RP 1046 + correction for non-standard temp
 
-        Value = A.tas2cas(586.266, 30000, -70, temp_units='F')
+        Value = A.tas2cas(586.266, 30000, -70, temp_units="F")
         Truth = 400
         self.assertTrue(RE(Value, Truth) <= 3e-5)
 
 
 class Test_mach2dp_over_p(unittest.TestCase):
-
     def test_01(self):
 
         # M0.8
 
-        Value = A.mach2dp_over_p(.8)
+        Value = A.mach2dp_over_p(0.8)
 
         # truth value from NASA RP 1046
 
-        Truth = .52434
+        Truth = 0.52434
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
-# ....def test_02(self):
-# ........# check out of range on mach too high
-# ........self.assertRaises(ValueError, A.mach2dp_over_p, 1.0001)
+    # ....def test_02(self):
+    # ........# check out of range on mach too high
+    # ........self.assertRaises(ValueError, A.mach2dp_over_p, 1.0001)
 
     def test_02(self):
 
@@ -403,7 +394,7 @@ class Test_mach2dp_over_p(unittest.TestCase):
 
         # truth value from NASA RP 1046
 
-        Truth = .89293
+        Truth = 0.89293
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_03(self):
@@ -414,7 +405,7 @@ class Test_mach2dp_over_p(unittest.TestCase):
 
         # truth value from NASA RP 1046
 
-        Truth = .89514
+        Truth = 0.89514
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_04(self):
@@ -430,34 +421,33 @@ class Test_mach2dp_over_p(unittest.TestCase):
 
 
 class Test_dp_over_p2mach(unittest.TestCase):
-
     def test_01(self):
 
         # M0.8
 
-        Value = A.dp_over_p2mach(.52434)
+        Value = A.dp_over_p2mach(0.52434)
 
         # truth value from NASA RP 1046
 
-        Truth = .8
+        Truth = 0.8
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_02(self):
 
         # M0.999
 
-        Value = A.dp_over_p2mach(.89072)
+        Value = A.dp_over_p2mach(0.89072)
 
         # truth value from NASA RP 1046
 
-        Truth = .999
+        Truth = 0.999
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_03(self):
 
         # M1.0
 
-        Value = A.dp_over_p2mach(.89293)
+        Value = A.dp_over_p2mach(0.89293)
 
         # truth value from NASA RP 1046
 
@@ -468,7 +458,7 @@ class Test_dp_over_p2mach(unittest.TestCase):
 
         # M1.001
 
-        Value = A.dp_over_p2mach(.89514)
+        Value = A.dp_over_p2mach(0.89514)
 
         # truth value from NASA RP 1046
 
@@ -488,7 +478,6 @@ class Test_dp_over_p2mach(unittest.TestCase):
 
 
 class Test_tas2mach(unittest.TestCase):
-
     def test_01(self):
 
         # Mach 1
@@ -504,19 +493,18 @@ class Test_tas2mach(unittest.TestCase):
 
         # Mach .5, mph, deg F
 
-        Value = A.tas2mach(761.22 / 2, 59, speed_units='mph',
-                           temp_units='F')
+        Value = A.tas2mach(761.22 / 2, 59, speed_units="mph", temp_units="F")
 
         # truth value from NASA RP 1046
 
-        Truth = .5
+        Truth = 0.5
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_03(self):
 
         # Mach 1, mph, 10,000 ft
 
-        Value = A.tas2mach(734.58, speed_units='mph', altitude=10000)
+        Value = A.tas2mach(734.58, speed_units="mph", altitude=10000)
 
         # truth value from NASA RP 1046
 
@@ -527,8 +515,7 @@ class Test_tas2mach(unittest.TestCase):
 
         # Mach 1, km/h, 10,000 m
 
-        Value = A.tas2mach(1078.07, speed_units='km/h', altitude=10000,
-                           alt_units='m')
+        Value = A.tas2mach(1078.07, speed_units="km/h", altitude=10000, alt_units="m")
 
         # truth value from NASA RP 1046
 
@@ -537,7 +524,6 @@ class Test_tas2mach(unittest.TestCase):
 
 
 class Test_mach2tas(unittest.TestCase):
-
     def test_01(self):
 
         # Mach 1
@@ -553,7 +539,7 @@ class Test_mach2tas(unittest.TestCase):
 
         # Mach .5
 
-        Value = A.mach2tas(.5, 59, speed_units='mph', temp_units='F')
+        Value = A.mach2tas(0.5, 59, speed_units="mph", temp_units="F")
 
         # truth value from NASA RP 1046
 
@@ -564,7 +550,7 @@ class Test_mach2tas(unittest.TestCase):
 
         # Mach 1, mph, 10,000 ft
 
-        Value = A.mach2tas(1, speed_units='mph', altitude=10000)
+        Value = A.mach2tas(1, speed_units="mph", altitude=10000)
 
         # truth value from NASA RP 1046
 
@@ -573,12 +559,11 @@ class Test_mach2tas(unittest.TestCase):
 
 
 class Test_mach2temp(unittest.TestCase):
-
     def test_01(self):
 
         # Mach 0.5, 15 deg C, K = 0.5
 
-        Value = A.mach2temp(.5, 15, .5)
+        Value = A.mach2temp(0.5, 15, 0.5)
         Truth = 7.97195121951
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -586,13 +571,12 @@ class Test_mach2temp(unittest.TestCase):
 
         # Mach 0.7, 59 deg F, K = 0.8
 
-        Value = A.mach2temp(.7, 59, .8, temp_units='F')
+        Value = A.mach2temp(0.7, 59, 0.8, temp_units="F")
         Truth = 21.29253709199
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
 
 class Test_tas2temp(unittest.TestCase):
-
     def test_01(self):
 
         # 300 KTAS, 15 deg C, K = 0
@@ -605,7 +589,7 @@ class Test_tas2temp(unittest.TestCase):
 
         # 300 mph TAS, 59 deg F, K = 0.8
 
-        Value = A.tas2temp(300, 59, .8, temp_units='F', speed_units = 'mph')
+        Value = A.tas2temp(300, 59, 0.8, temp_units="F", speed_units="mph")
         Truth = 46.11
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
@@ -613,10 +597,11 @@ class Test_tas2temp(unittest.TestCase):
 
         # 1000 km/h TAS, 59 deg F, K = 0.95
 
-        Value = A.tas2temp(1000, 59, .95, temp_units='F', speed_units = 'km/h')
+        Value = A.tas2temp(1000, 59, 0.95, temp_units="F", speed_units="km/h")
         Truth = -6.664535
         # print Value, Truth
         self.assertTrue(RE(Value, Truth) <= 1e-5)
+
 
 # create test suites
 
@@ -663,4 +648,3 @@ unittest.TextTestRunner(verbosity=5).run(main_suite)
 # tracebacks from failures.
 # if __name__ == '__main__':
 #     unittest.main()
-
