@@ -345,13 +345,21 @@ def _speed2dp(
     return dp
 
 
-def _super_cas2dp(mcas):
+def _super_cas2dp(mcas: float) -> float:
     """Return the  differential pressure (difference between pitot and static
     pressures) for a given CAS.
+    This function  only  works for the following conditions:
+        - CAS > 661.48 kt
+        - speed in m/s
+        - pressure in pa.
 
-    This function only works for speed in m/s, and pressure in pa.
+    Args:
+        mcas (float): [description]
+        #TODO: describe mcas
 
-    This function is only intended for CAS > 661.48 kt.
+    Returns:
+        float : differential pressure (difference between pitot and static
+    pressures) for a given CAS.
     """
 
     dp_over_P0 = (F * (mcas / A0) ** 7.0) / (
@@ -362,18 +370,26 @@ def _super_cas2dp(mcas):
     return dp
 
 
-def cas2dp(cas, speed_units=default_speed_units, press_units=default_press_units):
-    """
-    Return the differential pressure (difference between pitot and static
-    pressures) for a given CAS.
+def cas2dp(
+    cas, speed_units=default_speed_units, press_units=default_press_units
+) -> float:
+    """Converts calibrated airspeed to differential pressure (difference between pitot and static
+    pressures) for a given CAS
 
-    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
-
-    The pressure units may be in inches of HG, mm of HG, psi, lb/ft^2,
-    hpa and mb.  The units are specified as: 'in HG', 'mm HG', 'psi',
-    'lb/in**2', 'psf', 'lb/ft**2 'hpa', 'mb' or 'pa'.
-
+    Args:
+        cas (float): calibrated airspeed
+        speed_units (string, optional): kt', 'mph', 'km/h', 'm/s' or 'ft/s'. Defaults to default_speed_units.
+        press_units (str, optional): inches of HG, mm of HG, psi, lb/ft^2,
+                                hpa and mb.
+                                The units are specified as: 'in HG',
+                                'mm HG', 'psi','lb/in**2', 'psf', 'lb/ft**2 'hpa',
+                                'mb' or 'pa'.
+                                 Defaults to default_press_units.
     If the units are not specified, the units in default_units.py are used.
+
+    Returns:
+        float: differential pressure (difference between pitot and static
+    pressures) for a given CAS
     """
 
     # check to confirm the speed is less than 661.48 kt
