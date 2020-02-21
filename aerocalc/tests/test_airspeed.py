@@ -28,8 +28,7 @@ from .. import airspeed as A
 
 def RE(value, truth):
     """ Return the absolute value of the relative error.
-...."""
-
+    """
     return abs((value - truth) / truth)
 
 
