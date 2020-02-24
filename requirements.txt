@@ -1,7 +1,6 @@
 apipkg==1.5
 appdirs==1.4.3
 attrs==19.3.0
-black==19.10b0
 Click==7.0
 coverage==5.0.3
 execnet==1.7.1
@@ -39,4 +38,3 @@ tornado==6.0.3
 typed-ast==1.4.1
 typing-extensions==3.7.4.1
 wcwidth==0.1.8
-zipp==3.0.0
