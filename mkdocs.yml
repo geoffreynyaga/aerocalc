@@ -1,0 +1,11 @@
+site_name: aerocalc
+repo_url: https://github.com/geoffreynyaga/aerocalc
+site_description: AeroCalc is a pure python package that performs various aeronautical engineering calculations. Currently it provides airspeed conversions, static source error correction calculations, standard atmosphere calculations and unit conversions.
+
+copyright: kevin01 -at- kilohotel.com
+
+# docs_dir: "aerocalc"
+
+nav:
+  - Home: index.md
+  - License: license.md

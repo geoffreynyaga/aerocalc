@@ -38,5 +38,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Topic :: Scientific/Engineering :: Atmospheric Science",
+        "Programming Language :: Python :: 3",
     ],
 )
