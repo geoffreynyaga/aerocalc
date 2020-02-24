@@ -1,15 +1,22 @@
-# aerocalc ✈️🧮
+# Welcome to aerocalc ✈️🧮 documentation
 
-aerocalc v0.11 python3 version (converted using 2to3 tool)
+> #### AeroCalc Aeronautical Engineering Calculations
+>
+> AeroCalc is a pure python package that performs various aeronautical engineering calculations.
+>
+> Currently it provides:
+>
+> - airspeed conversions,
+> - static source error correction calculations
+> - standard atmosphere calculations and
+> - unit conversions.
 
-> ## Original aerocalc:
+> ### Original aerocalc:
+>
+> For original documentation visit [kilohotel](https://kilohotel.com/python/aerocalc/.)
 >
 > - Homepage: https://kilohotel.com/python/aerocalc/
 > - pypi website: https://pypi.python.org/pypi/AeroCalc/0.11
->
-> #### AeroCalc 0.11 Aeronautical Engineering Calculations
->
-> AeroCalc is a pure python package that performs various aeronautical engineering calculations. Currently it provides airspeed conversions, static source error correction calculations, standard atmosphere calculations and unit conversions.
 
 ## Installation 📥
 
@@ -23,6 +30,24 @@ tar xf v0.11-py3.tar.gz
 cd aerocalc-0.11-py3
 
 python setup.py install
+```
+
+## Project layout
+
+```
+    .
+    ├── aerocalc # Source code folder.
+    │   └── tests
+    ├── docs # The documentation directory.
+    ├── htmlcov # Test coverage folder.
+    ├── site # Documentation build for deployment.
+    │   ├── about
+    │   ├── css
+    │   ├── fonts
+    │   ├── img
+    │   ├── js
+    │   └── search
+    └── venv # Your generated virtual environment.
 ```
 
 ## Testing 🧪🧪
