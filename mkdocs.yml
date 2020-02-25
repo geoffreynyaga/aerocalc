@@ -8,4 +8,7 @@ copyright: kevin01 -at- kilohotel.com
 
 nav:
   - Home: index.md
+  - Defaults: defaults.md
+  - Conversions: conversions.md
+  - Airspeed Calculations: airspeed.md
   - License: license.md
