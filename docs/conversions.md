@@ -189,7 +189,6 @@ def speed_conv(S, from_units=default_speed_units, to_units=default_speed_units):
     """
     ...
     return converted_speed
-
 ```
 
 ### Example:
@@ -201,184 +200,124 @@ def speed_conv(S, from_units=default_speed_units, to_units=default_speed_units):
 199.86453563714903
 ```
 
+## Temperature Conversion
+
+> Converts absolute temperature values between deg C, F, K and R.
+
+> NOTE: This function should <b>NOT</b> be used for relative temperature conversions,
+> i.e. `temperature differences.`
+
+```python
 def temp_conv(T, from_units=default_temp_units, to_units=default_temp_units):
-"""
-Convert absolute temperature values between deg C, F, K and R.
-
-    This function should not be used for relative temperature conversions,
-    i.e. temperature differences.
-
+    """
     The incoming value is first converted to deg K, then it is converted to
     desired return value.
     The units default to those specified in default_units.py
 
-
-    Examples:
-
-    Convert 32 deg F to deg C, with deg C as the default units:
-    >>> temp_conv(32, from_units = 'F')
-    0.0
-
-    Convert 100 deg C to deg F, with deg C as the default units:
-    >>> temp_conv(100, to_units = 'F')
-    212.0
-
-    Convert 59 deg F to deg K
-    >>> temp_conv(59, from_units = 'F', to_units = 'K')
-    288.14999999999998
     """
+    return converted_temperature
+```
 
-    if from_units == "C":
-        T += 273.15
-    elif from_units == "F":
-        T = ((T - 32) * 5.0) / 9.0 + 273.15
-    elif from_units == "K":
-        pass
-    elif from_units == "R":
-        T *= 5.0 / 9.0
-    else:
-        raise ValueError('from_units must be one of "C", "F", "K" or "R".')
+### Examples:
 
-    if to_units == "C":
-        return T - 273.15
-    elif to_units == "F":
-        return (T - 273.15) * 1.8 + 32
-    elif to_units == "K":
-        return T
-    elif to_units == "R":
-        return T * 1.8
-    else:
-        raise ValueError('to_units must be one of "C", "F", "K" or "R".')
+`Convert 32 deg F to deg C, with deg C as the default units:`
 
+```bash
+> temp_conv(32, from_units = 'F')
+> 0.0
+```
+
+`Convert 100 deg C to deg F, with deg C as the default units:`
+
+```bash
+> temp_conv(100, to_units = 'F')
+> 212.0
+```
+
+`Convert 59 deg F to deg K`
+
+```bash
+> temp_conv(59, from_units = 'F', to_units = 'K')
+> 288.14999999999998
+```
+
+## Volume Conversions
+
+> <b>`Convert volume values between USG, ImpGal (Imperial gallons), l (litres), ft**3, in**3, m**3, km**3, sm**3 and nm**3.`</b>
+
+```python
 def vol_conv(V, from_units=default_vol_units, to_units=default_vol_units):
-"""
-Convert volume values between USG, ImpGal (Imperial gallons), l (litres), ft**3, in**3, m**3, km**3, sm**3 and nm**3.
-
+    """
     The incoming value is first converted to ft**3, then it is converted to
     desired return value.
-
 
     The units default to those specified in default_units.py
 
     Examples:
 
-    Convert 1 cubic foot to US gallons, with cubic feet already defined as
-    the default units:
-    >>> vol_conv(1, to_units = 'USG')
-    7.4805194804946105
 
-    Convert 1 Imperial gallon to cubic feet, with cubic feet already defined
-    as the default units:
-    >>> vol_conv(1, from_units = 'ImpGal')
-    0.16054365323600001
-
-    Convert 10 US gallon to litres:
-    >>> vol_conv(10, from_units = 'USG', to_units = 'l')
-    37.854117840125852
     """
+    return converted_volume
+```
 
-    if from_units == "ft**3":
-        pass
-    elif from_units == "in**3":
-        V /= 12.0 ** 3
-    elif from_units == "m**3":
-        V /= 0.3048 ** 3
-    elif from_units == "km**3":
-        V /= 0.0003048 ** 3
-    elif from_units == "sm**3":
-        V *= 5280.0 ** 3
-    elif from_units == "nm**3":
-        V *= (1852 / 0.3048) ** 3
-    elif from_units == "USG":
-        V *= 0.133680555556
-    elif from_units == "ImpGal":
-        V *= 0.160543653236
-    elif from_units == "l":
-        V /= 3.048 ** 3
-    else:
-        raise ValueError(
-            'from_units must be "ft**3", "in**3", "USG", "ImpGal", "l", "m**3", "km**3", "sm**3" (cubic statute miles) or "nm**3" (cubic nautical miles).'
-        )
+`Convert 1 cubic foot to US gallons, with cubic feet already defined as the default units:`
 
-    if to_units == "ft**3":
-        return V
-    elif to_units == "in**3":
-        return V * 12.0 ** 3
-    elif to_units == "m**3":
-        return V * 0.3048 ** 3
-    elif to_units == "km**3":
-        return V * 0.0003048 ** 3
-    elif to_units == "sm**3":
-        return V / 5280.0 ** 3
-    elif to_units == "nm**3":
-        return V * (0.3048 / 1852) ** 3
-    elif to_units == "USG":
-        return V / 0.133680555556
-    elif to_units == "ImpGal":
-        return V / 0.160543653236
-    elif to_units == "l":
-        return V * 3.048 ** 3
-    else:
-        raise ValueError(
-            'to_units must be "ft**3", "in**3", "USG", "ImpGal", "l", "m**3", "km**3", "sm**3" (cubic statute miles) or "nm**3" (cubic nautical miles).'
-        )
+```bash
+> vol_conv(1, to_units = 'USG')
+7.4805194804946105
+```
 
+`Convert 1 Imperial gallon to cubic feet, with cubic feet already defined as the default units:`
+
+```shell
+> vol_conv(1, from_units = 'ImpGal')
+
+0.16054365323600001
+```
+
+`Convert 10 US gallon to litres:`
+
+```bash
+> vol_conv(10, from_units = 'USG', to_units = 'l')
+37.854117840125852
+```
+
+## Weight Conversion
+
+> Convert weight values between lb and kg.
+>
+> ### `Purists will yell that lb is a unit of weight, and kg is a unit of mass.`
+>
+> ### `Get over it!!!!!`
+
+```python
 def wt_conv(W, from_units=default_weight_units, to_units=default_weight_units):
-"""
-Convert weight values between lb and kg.
-
-    Purists will yell that lb is a unit of weight, and kg is a unit of mass.
-    Get over it.
-
+    """
     The incoming value is first converted to kg, then it is converted to the
     desired return value.
 
     The units default to those specified in default_units.py
-
-
     """
+    return converted_weight
+```
 
-    if from_units == "kg":
-        pass
-    elif from_units == "lb":
-        W *= 0.453592
-    else:
-        raise ValueError('from_units must be one of "lb" or "kg".')
+## AVGAS Conversion
 
-    if to_units == "kg":
-        pass
-    elif to_units == "lb":
-        W *= 2.204622622
-    else:
-        raise ValueError('to_units must be one of "lb" or "kg".')
+> Convert aviation gasoline between units of lb, US Gallon (USG),
+> Imperial Gallon (Imp Gal), litres (l) and kg, assuming nominal
+> density for aviation gasoline of 6.01 lb per USG.
 
-    return W
-
-def avgas_conv(
-AG,
-from_units=default_avgas_units,
-to_units=default_avgas_units,
-temp=15,
-temp_units="C",
-grade="nominal",
-):
-"""
-Convert aviation gasoline between units of lb, US Gallon (USG),
-Imperial Gallon (Imp Gal), litres (l) and kg, assuming nominal
-density for aviation gasoline of 6.01 lb per USG.
-
-    The units default to those specified in default_units.py
-
+```
     Note: it was difficult to find authoritative values for aviation gasoline
-    density.  Conventional wisdom is that aviation gasoline has a density of
-    6 lb/USG.  The Canada Flight Supplement provides densities of:
-    temp      density     density    density
-    (deg C)   (lb/USG)  (lb/ImpGal)  (lb/l)
-    -40         6.41       7.68       1.69
-    -20         6.26       7.50       1.65
-      0         6.12       7.33       1.62
-     15         6.01       7.20       1.59
-     30         5.90       7.07       1.56
+    density. Conventional wisdom is that aviation gasoline has a density of
+    6 lb/USG. The Canada Flight Supplement provides densities of:
+    temp density density density
+    (deg C) (lb/USG) (lb/ImpGal) (lb/l)
+    -40     6.41     7.68        1.69
+    -20     6.26     7.50        1.65
+    0       6.12     7.33        1.62
+    15      6.01     7.20        1.59
+    30      5.90     7.07        1.56
 
     However, the Canada Flight Supplement does not provide a source for its
     density data.  And, the values for the different volume units are not
@@ -396,6 +335,7 @@ density for aviation gasoline of 6.01 lb per USG.
     It provides the following density data valid at 15 deg C (the BP document
     only provides density in kg/m**3 - the density in lb/USG were calculated
     by Kevin Horton):
+
     Avgas    density     density
     Type    (kg/m**3)    (lb/USG)
     80       690          5.76
@@ -414,72 +354,21 @@ density for aviation gasoline of 6.01 lb per USG.
     The grade may be specified as \"80\", \"100\" or \"100LL\".  It defaults to
     \"100LL\" if it is not specified.
 
+```
+
+```python
+def avgas_conv(
+AG,
+from_units=default_avgas_units,
+to_units=default_avgas_units,
+temp=15,
+temp_units="C",
+grade="nominal",
+):
+    """
+    The units default to those specified in default_units.py
     The temperature defaults to 15 deg C if it is not specified.
     """
 
-    lb_per_USG_15_nom = (
-        6.01  # nominal density at 15 deg C from Canada Flight Supplement
-    )
-    slope = (
-        -0.007256
-    )  # change in density per deg C based on data from Canada Flight Supplement
-
-    lb_per_USG = lb_per_USG_15_nom * (
-        1
-        + (slope * (temp_conv(temp, from_units=temp_units, to_units="C") - 15))
-        / lb_per_USG_15_nom
-    )  # density corrected for temperature, using nominal density value
-
-    if grade == "nominal":
-        grade_density = lb_per_USG_15_nom
-    elif grade == "100LL":
-        grade_density = 5.967
-    elif str(grade) == "100":
-        grade_density = 5.801
-    elif str(grade) == "80":
-        grade_density = 5.7583
-    else:
-        raise ValueError(
-            'grade must be one of "nominal", "80", "100" or "100LL", with a default of "100LL"'
-        )
-
-    # Correct the density if the grade is other than nominal.
-    # If the grade actually is nominal, we are multiplying by 1 / 1
-
-    lb_per_USG *= grade_density / lb_per_USG_15_nom
-
-    if from_units == "lb":
-        pass
-    elif from_units == "USG":
-        AG *= lb_per_USG
-    elif from_units == "ImpGal":
-        AG *= vol_conv(lb_per_USG, from_units="ImpGal", to_units="USG")
-    elif from_units == "kg":
-        AG = wt_conv(AG, from_units="kg")
-    elif from_units == "l":
-        AG *= vol_conv(lb_per_USG, from_units="l", to_units="USG")
-    else:
-        raise ValueError(
-            'from_units must be one of "lb", "USG", "Imp Gal", "l", or "kg".'
-        )
-
-    if to_units == "lb":
-        pass
-    elif to_units == "USG":
-        AG /= lb_per_USG
-    elif to_units == "ImpGal":
-        AG /= vol_conv(lb_per_USG, from_units="ImpGal", to_units="USG")
-    elif to_units == "kg":
-        AG = wt_conv(AG, to_units="kg")
-    elif to_units == "l":
-        AG /= vol_conv(lb_per_USG, from_units="l", to_units="USG")
-    else:
-        raise ValueError(
-            'from_units must be one of "lb", "USG", "Imp Gal", "l", or "kg".'
-        )
-
-    return AG
-
-```
-
+    return converted_avgas
 ```
