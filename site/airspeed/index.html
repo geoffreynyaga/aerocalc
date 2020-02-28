@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Airspeed Calculations - aerocalc</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">aerocalc</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../defaults/" class="nav-link">Defaults</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../conversions/" class="nav-link">Conversions</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Airspeed Calculations</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../license/" class="nav-link">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../conversions/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../license/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/geoffreynyaga/aerocalc/edit/master/docs/airspeed.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#airspeed-module" class="nav-link">AIRSPEED MODULE</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#delta-pressure-to-speed" class="nav-link">delta pressure to speed</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#delta-pressure-to-cas" class="nav-link">delta pressure to CAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#delta-pressure-and-altitude-to-eas" class="nav-link">delta pressure and altitude to EAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#delta-pressure-altitude-and-temperature-to-tas" class="nav-link">delta pressure, altitude and temperature to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#speed-to-delta-pressure" class="nav-link">speed to delta pressure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#super-cas-to-delta-pressure" class="nav-link">Super CAS to delta pressure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#cas-to-delta-pressure" class="nav-link">CAS to delta pressure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#eas-and-altitude-to-delta-pressure" class="nav-link">EAS and altitude to delta pressure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#tas-altitude-and-temperature-to-delta-pressure" class="nav-link">TAS, altitude and temperature to delta pressure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#cas-to-eas" class="nav-link">CAS to EAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-cas-to-eas" class="nav-link">interactive CAS to EAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#cas-to-tas" class="nav-link">CAS to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-cas-to-tas" class="nav-link">interactive CAS to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#eas-to-tas" class="nav-link">EAS to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-eas-to-tas" class="nav-link">interactive EAS to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#eas-to-cas" class="nav-link">EAS to CAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-eas-to-cas" class="nav-link">interactive EAS to CAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#tas-to-cas" class="nav-link">TAS to CAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-tas-to-cas" class="nav-link">interactive TAS to CAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#tas-to-eas" class="nav-link">TAS to EAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-tas-to-eas" class="nav-link">interactive TAS to EAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#delta-p-over-p-to-mach" class="nav-link">delta p over p to Mach</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#mach-to-delta-p-over-p" class="nav-link">Mach to delta p over p</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#conversions-between-cas-mach-and-altitude" class="nav-link">conversions between cas, mach and altitude</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#mach-and-temperature-to-tas" class="nav-link">Mach and temperature to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-mach-and-temperature-to-tas" class="nav-link">interactive Mach and temperature to TAS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#tas-and-temperature-to-mach" class="nav-link">TAS and temperature to Mach</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-tas-and-temperature-to-mach" class="nav-link">interactive TAS and temperature to Mach</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ram-temperature-rise-calculations" class="nav-link">Ram temperature rise calculations</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#mach-and-indicated-temperature-to-ambient-temperature" class="nav-link">Mach and indicated temperature to ambient temperature</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#tas-and-indicated-temperature-to-ambient-temperature" class="nav-link">TAS and indicated temperature to ambient temperature</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="airspeed-module">AIRSPEED MODULE</h1>
+<p>INTRO:</p>
+<blockquote>
+<p>Perform various air speed conversions.</p>
+<p>Convert between Indicated Air Speed (IAS), Calibrated Air Speed (CAS),
+Equivalent Air Speed (EAS), True Air Speed (TAS) and mach number.</p>
+<p>Convert between pitot static system pressures and air speed.</p>
+<p>Provide interactive airspeed conversions when script is run directly, e.g.
+'python airspeed.py'.</p>
+</blockquote>
+<pre><code>default_area_units = &quot;ft**2&quot;
+default_power_units = &quot;hp&quot;
+default_speed_units = &quot;kt&quot;
+default_temp_units = &quot;C&quot;
+default_weight_units = &quot;lb&quot;
+default_press_units = &quot;in HG&quot;
+default_density_units = &quot;lb/ft**3&quot;
+default_length_units = &quot;ft&quot;
+default_avgas_units = &quot;lb&quot;
+
+P0 = 101325.0 # Pressure at sea level, pa
+
+# speed of sound from http://www.edwards.af.mil/sharing/tech_pubs/Handbook-10%20March02.pdf
+
+A0 = 340.2941 # speed of sound at sea level, std day, m/s
+
+F = (1.25 ** 2.5 \* (2.4 ** 2.0) \*_ 2.5) _ 1.2
+
+# F calculated by manipulating NASA RP 1046 pg 17
+
+# F is used in some of the supersonic solution equations.
+</code></pre>
+
+<h2 id="delta-pressure-to-speed">delta pressure to speed</h2>
+<pre><code class="python">def _dp2speed(
+dp, Pref, Rhoref, press_units=default_press_units, speed_units=default_speed_units,
+):
+    ...
+    return speed
+</code></pre>
+
+<h2 id="delta-pressure-to-cas">delta pressure to CAS</h2>
+<blockquote>
+<p><code>Return the CAS for a given differential pressure (the difference between the pitot and static pressures).</code></p>
+</blockquote>
+<pre><code>The pressure units may be in inches of HG, mm of HG, psi, lb/ft^2,
+hpa and mb.  The units are specified as: 'in HG', 'mm HG', 'psi',
+'lb/in**2', 'psf', 'lb/ft**2 'hpa', 'mb' or 'pa'.
+
+The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+</code></pre>
+
+<pre><code class="python">def dp2cas(dp, press_units=default_press_units, speed_units=default_speed_units):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+    ...
+    return cas
+</code></pre>
+
+<h3 id="examples">Examples:</h3>
+<p><code>Determine the CAS in kt that is equivalent to a differential pressure of 15 in HG:</code></p>
+<pre><code class="bash">&gt; dp2cas(15)
+518.96637566127652
+
+</code></pre>
+
+<p><code>Determine the CAS in mph that is equivalent to a differential pressure of 0.2 psi:</code></p>
+<pre><code class="bash">&gt; dp2cas(.2, press_units = 'psi', speed_units = 'mph')
+105.88275188221526
+</code></pre>
+
+<h2 id="delta-pressure-and-altitude-to-eas">delta pressure and altitude to EAS</h2>
+<p><code>Return the EAS for a given differential pressure (the difference between the pitot and static pressures) and altitude.</code></p>
+<pre><code>    The pressure units may be in inches of HG, mm of HG, psi, lb/ft^2,
+    hpa and mb.  The units are specified as: 'in HG', 'mm HG', 'psi',
+    'lb/in**2', 'psf', 'lb/ft**2 'hpa', 'mb' or 'pa'.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+</code></pre>
+
+<pre><code class="python">def dp2eas(
+dp,
+altitude,
+press_units=default_press_units,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+
+    This first version only works for EAS &lt; 661.48 kt.
+    &quot;&quot;&quot;
+    ...
+    return eas
+</code></pre>
+
+<h2 id="delta-pressure-altitude-and-temperature-to-tas">delta pressure, altitude and temperature to TAS</h2>
+<p><code>Return the TAS for a given differential pressure (the difference between the pitot and static pressures) and altitude.</code></p>
+<pre><code>The pressure units may be in inches of HG, mm of HG, psi, lb/ft^2,
+    hpa and mb.  The units are specified as: 'in HG', 'mm HG', 'psi',
+    'lb/in**2', 'psf', 'lb/ft**2 'hpa', 'mb' or 'pa'.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R.
+</code></pre>
+
+<pre><code class="python">def dp2tas(
+dp,
+altitude,
+temp,
+press_units=default_press_units,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+temp_units=default_temp_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+
+    This first version only works for TAS &lt; 661.48 kt.
+    &quot;&quot;&quot;
+    ...
+    return tas
+</code></pre>
+
+<h2 id="speed-to-delta-pressure">speed to delta pressure</h2>
+<p><code>Return a delta pressure (the difference between the pitot and static pressures) for a given speed. Subsonic equation.</code></p>
+<pre><code class="python">def _speed2dp(
+speed,
+Pref,
+Rhoref,
+press_units=default_press_units,
+speed_units=default_speed_units,
+):
+    ...
+    return dp
+</code></pre>
+
+<h2 id="super-cas-to-delta-pressure">Super CAS to delta pressure</h2>
+<p><code>Return the differential pressure (difference between pitot and static pressures) for a given CAS.</code></p>
+<pre><code>This function only works for the following conditions: - CAS &gt; 661.48 kt - speed in m/s - pressure in pa.
+</code></pre>
+
+<pre><code class="python">def _super_cas2dp(mcas: float) -&gt; float:
+    ...
+    return dp
+</code></pre>
+
+<h2 id="cas-to-delta-pressure">CAS to delta pressure</h2>
+<p><code>Converts calibrated airspeed to differential pressure (difference between pitot and static pressures) for a given CAS</code></p>
+<pre><code class="python">def cas2dp(
+cas, speed_units=default_speed_units, press_units=default_press_units
+) -&gt; float:
+&quot;&quot;&quot;
+    Args:
+        cas (float): calibrated airspeed
+        speed_units (string, optional): kt', 'mph', 'km/h', 'm/s' or 'ft/s'. Defaults to default_speed_units.
+        press_units (str, optional): inches of HG, mm of HG, psi, lb/ft^2,
+                                hpa and mb.
+                                The units are specified as: 'in HG',
+                                'mm HG', 'psi','lb/in**2', 'psf', 'lb/ft**2 'hpa',
+                                'mb' or 'pa'.
+                                 Defaults to default_press_units.
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+    ...
+    return dp
+</code></pre>
+
+<h2 id="eas-and-altitude-to-delta-pressure">EAS and altitude to delta pressure</h2>
+<p><code>Return the differential pressure (difference between pitot and static pressures) for a given EAS.</code></p>
+<pre><code> The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The pressure units may be in inches of HG, mm of HG, psi, lb/ft^2,
+    hpa and mb.  The units are specified as: 'in HG', 'mm HG', 'psi',
+    'lb/in**2', 'psf', 'lb/ft**2 'hpa', 'mb' or 'pa'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+</code></pre>
+
+<pre><code class="python">def eas2dp(
+eas,
+altitude,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+press_units=default_press_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+
+    This first version only works for CAS &lt; 661.48 kt.
+    &quot;&quot;&quot;
+    ...
+    return dp
+</code></pre>
+
+<h2 id="tas-altitude-and-temperature-to-delta-pressure">TAS, altitude and temperature to delta pressure</h2>
+<p><code>Return the differential pressure (difference between pitot and static pressures) for a given TAS.</code></p>
+<p>```The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.</p>
+<pre><code>The pressure units may be in inches of HG, mm of HG, psi, lb/ft^2,
+hpa and mb.  The units are specified as: 'in HG', 'mm HG', 'psi',
+'lb/in**2', 'psf', 'lb/ft**2 'hpa', 'mb' or 'pa'.
+
+The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+statute miles, ('sm') or nautical miles ('nm').
+
+The temperature may be in deg C, F, K or R.
+</code></pre>
+<pre><code>
+```python
+def tas2dp(
+tas,
+altitude,
+temp,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+temp_units=default_temp_units,
+press_units=default_press_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+
+    This first version only works for CAS &lt; 661.48 kt.
+    &quot;&quot;&quot;
+    ...
+    return dp
+</code></pre>
+
+<h2 id="cas-to-eas">CAS to EAS</h2>
+<p><code>Return the EAS for a given CAS, pressure altitude and temperature.</code></p>
+<p>```The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.</p>
+<pre><code>The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+statute miles, ('sm') or nautical miles ('nm').
+</code></pre>
+<pre><code>
+```python
+def cas2eas(
+cas, altitude, speed_units=default_speed_units, alt_units=default_alt_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+    &quot;&quot;&quot;
+    ...
+    return eas
+</code></pre>
+
+<h2 id="interactive-cas-to-eas">interactive CAS to EAS</h2>
+<p><code>Return the EAS for a given CAS, pressure altitude and temp, with interactive input from the user.</code></p>
+<pre><code class="python">def i_cas2eas(data_items):
+    # version that goes interactive, if required
+    ...
+    print(return_string)
+</code></pre>
+
+<h2 id="cas-to-tas">CAS to TAS</h2>
+<p><code>Return the TAS for a given CAS, pressure altitude and temperature.</code></p>
+<pre><code>The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+</code></pre>
+
+<pre><code class="python">def cas2tas(
+cas,
+altitude,
+temp=&quot;std&quot;,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+temp_units=default_temp_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+    &quot;&quot;&quot;
+    ...
+    return tas
+</code></pre>
+
+<h2 id="interactive-cas-to-tas">interactive CAS to TAS</h2>
+<p><code>Return the TAS for a given CAS, pressure altitude and temp, with interactive input from the user.</code></p>
+<pre><code class="python">def i_cas2tas(data_items):
+    # version that goes interactive, if required
+    ...
+    print(return_string)
+</code></pre>
+
+<h2 id="eas-to-tas">EAS to TAS</h2>
+<p><code>Return the TAS for a given EAS, pressure altitude and temperature.</code></p>
+<pre><code>The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+</code></pre>
+
+<pre><code class="python">def eas2tas(
+eas,
+altitude,
+temp=&quot;std&quot;,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+temp_units=default_temp_units,
+):
+    &quot;&quot;&quot;
+    If the units are not specified, the units in default_units.py are used.
+    &quot;&quot;&quot;
+    ...
+    return tas
+</code></pre>
+
+<h2 id="interactive-eas-to-tas">interactive EAS to TAS</h2>
+<p><code>Return the TAS for a given EAS, pressure altitude and temp, with interactive input from the user.</code></p>
+<pre><code class="python">def i_eas2tas(data_items):
+    # version that goes interactive, if required
+    ...
+    print(return_string)
+</code></pre>
+
+<h2 id="eas-to-cas">EAS to CAS</h2>
+<pre><code class="python">def eas2cas(
+eas, altitude, speed_units=default_speed_units, alt_units=default_alt_units,
+):
+&quot;&quot;&quot;
+Return the CAS for a given EAS, pressure altitude and temperature.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    If the units are not specified, the default units in default_units.py are used.
+
+    Examples:
+
+    Determine equivalent Air Speed for 250 kt CAS at 10,000 ft:
+    &gt;&gt;&gt; cas2eas(250, 10000)
+    248.09577137102258
+
+    Determine equivalent Air Speed for 250 mph CAS at 10,000 ft:
+    &gt;&gt;&gt; cas2eas(250, 10000, speed_units = 'mph')
+    248.54048288757579
+    &quot;&quot;&quot;
+
+    dp = eas2dp(eas, altitude, speed_units, alt_units)
+    cas = dp2cas(dp, speed_units=speed_units)
+
+    return cas
+</code></pre>
+
+<h2 id="interactive-eas-to-cas">interactive EAS to CAS</h2>
+<pre><code class="python">def i_eas2cas(data_items):
+&quot;&quot;&quot;
+Return the CAS for a given EAS, pressure altitude, with
+interactive input from the user.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    data_items[&quot;eas&quot;] = _get_EAS(data_items)
+    eas = data_items[&quot;eas&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    print()
+    print(&quot;EAS = &quot;, eas, speed_units)
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print()
+
+    cas = eas2cas(eas, altitude, speed_units, alt_units)
+    data_items[&quot;cas&quot;] = cas
+    return_string = &quot;CAS = &quot; + str(cas) + &quot; &quot; + speed_units
+    print(return_string)
+</code></pre>
+
+<h2 id="tas-to-cas">TAS to CAS</h2>
+<pre><code class="python">def tas2cas(
+tas,
+altitude,
+temp=&quot;std&quot;,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+temp_units=default_temp_units,
+):
+&quot;&quot;&quot;
+Return the CAS for a given TAS, pressure altitude and temperature.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    Examples:
+
+    Determine the true Air Speed for 250 kt CAS at 10,000 ft with standard
+    temperature:
+    &gt;&gt;&gt; cas2tas(250, 10000)
+    288.70227231079861
+
+    Determine the true Air Speed for 250 mph CAS at 10,000 ft with standard
+    temperature:
+    &gt;&gt;&gt; cas2tas(250, 10000, speed_units = 'mph')
+    289.21977095514148
+
+    Determine the true Air Speed for 250 mph CAS at 10,000 ft with
+    temperature of 0 deg C:
+    &gt;&gt;&gt; cas2tas(250, 10000, 0, speed_units = 'mph')
+    291.80148048806217
+
+    Determine the true Air Speed for 250 mph CAS at 10,000 ft with
+    temperature of 0 deg F:
+    &gt;&gt;&gt; cas2tas(250, 10000, 0, speed_units = 'mph', temp_units = 'F')
+    282.14588227473797
+    &quot;&quot;&quot;
+
+    if temp == &quot;std&quot;:
+        temp = SA.alt2temp(altitude, temp_units=temp_units, alt_units=alt_units)
+
+    dp = tas2dp(
+        tas, altitude, temp, speed_units, alt_units=alt_units, temp_units=temp_units,
+    )
+    cas = dp2cas(dp, speed_units=speed_units)
+
+    return cas
+</code></pre>
+
+<h2 id="interactive-tas-to-cas">interactive TAS to CAS</h2>
+<pre><code class="python">def i_tas2cas(data_items):
+&quot;&quot;&quot;
+Return the CAS for a given TAS, pressure altitude and temp, with
+interactive input from the user.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    data_items[&quot;tas&quot;] = _get_TAS(data_items)
+    tas = data_items[&quot;tas&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    data_items[&quot;temp_units&quot;] = _get_temp_units(data_items)
+    temp_units = data_items[&quot;temp_units&quot;]
+
+    data_items[&quot;temp&quot;] = _get_temp(data_items)
+    temp = data_items[&quot;temp&quot;]
+
+    print()
+    print(&quot;TAS = &quot;, tas, speed_units)
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print(&quot;Temperature = &quot;, temp, &quot;deg&quot;, temp_units)
+    print()
+
+    cas = tas2cas(tas, altitude, temp, speed_units, alt_units, temp_units,)
+    data_items[&quot;cas&quot;] = cas
+    return_string = &quot;CAS = &quot; + str(cas) + &quot; &quot; + speed_units
+    print(return_string)
+</code></pre>
+
+<h2 id="tas-to-eas">TAS to EAS</h2>
+<pre><code class="python">def tas2eas(
+tas,
+altitude,
+temp=&quot;std&quot;,
+speed_units=default_speed_units,
+alt_units=default_alt_units,
+temp_units=default_temp_units,
+):
+&quot;&quot;&quot;
+Return the EAS for a given TAS, pressure altitude and temperature.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    if temp == &quot;std&quot;:
+        temp = SA.alt2temp(altitude, temp_units=temp_units, alt_units=alt_units)
+
+    dp = tas2dp(
+        tas, altitude, temp, speed_units, alt_units=alt_units, temp_units=temp_units,
+    )
+    eas = dp2eas(dp, altitude, alt_units=alt_units, speed_units=speed_units)
+
+    return eas
+</code></pre>
+
+<h2 id="interactive-tas-to-eas">interactive TAS to EAS</h2>
+<pre><code class="python">def i_tas2eas(data_items):
+&quot;&quot;&quot;
+Return the EAS for a given TAS, pressure altitude and temp, with
+interactive input from the user.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    data_items[&quot;tas&quot;] = _get_TAS(data_items)
+    tas = data_items[&quot;tas&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    data_items[&quot;temp_units&quot;] = _get_temp_units(data_items)
+    temp_units = data_items[&quot;temp_units&quot;]
+
+    data_items[&quot;temp&quot;] = _get_temp(data_items)
+    temp = data_items[&quot;temp&quot;]
+
+    print()
+    print(&quot;TAS = &quot;, tas, speed_units)
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print(&quot;Temperature = &quot;, temp, &quot;deg&quot;, temp_units)
+    print()
+
+    eas = tas2eas(tas, altitude, temp, speed_units, alt_units, temp_units,)
+    data_items[&quot;eas&quot;] = eas
+    return_string = &quot;EAS = &quot; + str(eas) + &quot; &quot; + speed_units
+    print(return_string)
+</code></pre>
+
+<h2 id="delta-p-over-p-to-mach">delta p over p to Mach</h2>
+<pre><code class="python">def dp_over_p2mach(dp_over_p):
+&quot;&quot;&quot;
+Return the mach number for a given delta p over p.
+
+    Mach must be less than or equal to 10.
+    &quot;&quot;&quot;
+
+    #   mach = (5*( (dp_over_p + 1)**(2/7.) -1) )**0.5
+
+    mach = M.sqrt(5.0 * ((dp_over_p + 1.0) ** (2.0 / 7.0) - 1.0))
+
+    if mach &lt;= 1.0:
+        return mach
+    else:
+
+        # supersonic case - need to iterate a solution.  Set upper and lower
+        # guesses, and iterate until we zero in on a mach that produces the
+        # desired result.
+
+        dp_over_p_seek = dp_over_p
+
+        low = 1.0  # initial lower guess for mach
+
+        # This function works up to Mach 10  The upper limit can be
+        # extended by increasing the value of the initial upper guess
+        # (&quot;high&quot;).
+
+        high = 10  # initial upper guess for mach
+
+        # confirm initial low and high are OK:
+
+        dp_over_p_low = mach2dp_over_p(low)
+        if dp_over_p_low &gt; dp_over_p_seek:
+            raise ValueError(&quot;Initial lower mach guess is too high.&quot;)
+
+        dp_over_p_high = mach2dp_over_p(high)
+        if dp_over_p_high &lt; dp_over_p_seek:
+            raise ValueError(&quot;Initial upper mach guess is too low.&quot;)
+
+        guess = (low + high) / 2.0
+        dp_over_p_guess = mach2dp_over_p(guess)
+
+        # keep iterating until dp is within 0.001% of desired value
+
+        while M.fabs(dp_over_p_guess - dp_over_p_seek) / dp_over_p_seek &gt; 1e-5:
+            if dp_over_p_guess &gt; dp_over_p_seek:
+                high = guess
+            else:
+                low = guess
+
+            guess = (low + high) / 2.0
+            dp_over_p_guess = mach2dp_over_p(guess)
+
+    return guess
+</code></pre>
+
+<h2 id="mach-to-delta-p-over-p">Mach to delta p over p</h2>
+<pre><code class="python">def mach2dp_over_p(M):
+&quot;&quot;&quot;
+Return the delta p over p for a given mach number.
+The result is equal to:
+(pitot pressure - static pressure) / static pressure
+
+    Example - determine the delta p over p at mach 0.4:
+
+    &gt;&gt;&gt; mach2dp_over_p(.4)
+    0.11655196580975336
+    &quot;&quot;&quot;
+
+    if M &lt;= 1.0:
+        dp_over_p = (M ** 2.0 / 5.0 + 1.0) ** 3.5 - 1.0
+    else:
+        dp_over_p = (F * M ** 7.0) / (7.0 * M ** 2.0 - 1.0) ** 2.5 - 1.0
+
+    return dp_over_p
+</code></pre>
+
+<h1 id="conversions-between-cas-mach-and-altitude">conversions between cas, mach and altitude</h1>
+<blockquote>
+<p><code>NB: pick any two values, and find the third</code></p>
+</blockquote>
+<pre><code class="python">def cas_mach2alt(
+cas, mach, speed_units=default_speed_units, alt_units=default_alt_units,
+):
+    &quot;&quot;&quot;
+    Return the altitude that corresponds to a given CAS and mach.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    dp = cas2dp(cas, speed_units=speed_units, press_units=&quot;pa&quot;)
+    dp_over_p = mach2dp_over_p(mach)
+    p = dp / dp_over_p
+    altitude = SA.press2alt(p, press_units=&quot;pa&quot;, alt_units=alt_units)
+
+    return altitude
+</code></pre>
+
+<pre><code class="python">def i_cas_mach2alt(data_items):
+    &quot;&quot;&quot;
+    Return the altitude that corresponds to a given CAS and mach, with an
+    interactive interface.
+    &quot;&quot;&quot;
+
+    data_items[&quot;cas&quot;] = _get_CAS(data_items)
+    cas = data_items[&quot;cas&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    data_items[&quot;mach&quot;] = _get_mach(data_items)
+    mach = data_items[&quot;mach&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    print()
+    print(&quot;CAS = &quot;, cas, speed_units)
+    print(&quot;Mach = &quot;, mach)
+
+    #   print 'Desired altitude units are: ', alt_units
+
+    print()
+
+    alt = cas_mach2alt(cas, mach, speed_units, alt_units)
+    data_items[&quot;altitude&quot;] = alt
+
+    return_string = &quot;Altitude = &quot; + str(alt) + &quot; &quot; + alt_units
+    print(return_string)
+</code></pre>
+
+<pre><code class="python">def cas_alt2mach(
+cas, altitude, speed_units=default_speed_units, alt_units=default_alt_units,
+):
+    &quot;&quot;&quot;
+    Return the mach that corresponds to a given CAS and altitude.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    dp = cas2dp(cas, speed_units=speed_units, press_units=&quot;pa&quot;)
+    p = SA.alt2press(altitude, alt_units=alt_units, press_units=&quot;pa&quot;)
+    dp_over_p = dp / p
+    mach = dp_over_p2mach(dp_over_p)
+
+    return mach
+</code></pre>
+
+<pre><code class="python">def i_cas_alt2mach(data_items):
+    &quot;&quot;&quot;
+    Return the mach that corresponds to a given CAS and altitude, using an
+    interactive interface.
+    &quot;&quot;&quot;
+
+    data_items[&quot;cas&quot;] = _get_CAS(data_items)
+    cas = data_items[&quot;cas&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    print()
+    print(&quot;CAS = &quot;, cas, speed_units)
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print()
+
+    mach = cas_alt2mach(cas, altitude, speed_units, alt_units)
+    data_items[&quot;mach&quot;] = mach
+    print(&quot;Mach = &quot;, mach)
+</code></pre>
+
+<pre><code class="python">def \_cas_alt2mach2(
+cas, altitude, speed_units=default_speed_units, alt_units=default_alt_units,
+):
+&quot;&quot;&quot;
+Alternative, trial variant of cas_alt2mach, using the equations from
+USAF TPS notes.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    PR = SA.alt2press_ratio(altitude, alt_units)
+    cas = U.speed_conv(cas, from_units=speed_units, to_units=&quot;m/s&quot;)
+
+    if cas &lt;= A0:
+
+        # &lt;= 661.48 kt
+
+        mach = M.sqrt(
+            5.0
+            * (
+                ((1.0 / PR) * ((1.0 + 0.2 * (cas / A0) ** 2.0) ** 3.5 - 1.0) + 1.0)
+                ** (2.0 / 7.0)
+                - 1.0
+            )
+        )
+    else:
+        raise ValueError(&quot;CAS too high.&quot;)
+
+    return mach
+</code></pre>
+
+<pre><code class="python">def mach_alt2cas(
+mach, altitude, alt_units=default_alt_units, speed_units=default_speed_units,
+):
+&quot;&quot;&quot;
+Return the calibrated Air Speed that corresponds to a given mach and
+altitude.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    p = SA.alt2press(altitude, alt_units=alt_units, press_units=&quot;pa&quot;)
+    dp_over_p = mach2dp_over_p(mach)
+    dp = dp_over_p * p
+    cas = dp2cas(dp, press_units=&quot;pa&quot;, speed_units=speed_units)
+
+    return cas
+</code></pre>
+
+<pre><code class="python">def i_mach_alt2cas(data_items):
+&quot;&quot;&quot;
+Return the calibrated Air Speed that corresponds to a given mach and
+altitude, using an interactive interface.
+&quot;&quot;&quot;
+
+    data_items[&quot;mach&quot;] = _get_mach(data_items)
+    mach = data_items[&quot;mach&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    print()
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print(&quot;Mach = &quot;, mach)
+    print()
+
+    cas = mach_alt2cas(mach, altitude, alt_units, speed_units)
+    data_items[&quot;cas&quot;] = cas
+    return_string = &quot;CAS = &quot; + str(cas) + &quot; &quot; + speed_units
+    print(return_string)
+</code></pre>
+
+<h1 id="_1"></h1>
+<h2 id="mach-and-temperature-to-tas">Mach and temperature to TAS</h2>
+<pre><code class="python">def mach2tas(
+mach,
+temp=&quot;std&quot;,
+altitude=&quot;blank&quot;,
+temp_units=default_temp_units,
+alt_units=default_alt_units,
+speed_units=default_speed_units,
+):
+&quot;&quot;&quot;
+Return the TAS for a given mach number. The temperature or altitude
+must also be specified. If the altitude is specified, the temperature
+is assumed to be standard. If both the altitude and temperature are
+specified, the altitude input is ignored.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    Examples:
+
+    Determine the TAS in kt at 0.8 mach at a temperature of
+    -15 deg C:
+    &gt;&gt;&gt; mach2tas(0.8, -15)
+    500.87884108468597
+
+    Determine the TAS in kt at 0.8 mach at 30,000 ft, assuming
+    standard temperature:
+    &gt;&gt;&gt; mach2tas(0.8, altitude = 30000)
+    471.45798523415107
+
+    Determine the TAS in mph at 0.8 mach at 5000 m, assuming
+    standard temperature:
+    &gt;&gt;&gt; mach2tas(0.8, altitude = 5000, alt_units = 'm', speed_units = 'mph')
+    573.60326790383715
+
+    Determine the TAS in km/h at 0.4 mach at a temperature of
+    300 deg K:
+    &gt;&gt;&gt; mach2tas(0.4, 300, temp_units = 'K', speed_units = 'km/h')
+    499.99796329569176
+    &quot;&quot;&quot;
+
+    if temp == &quot;std&quot;:
+        if altitude != &quot;blank&quot;:
+            temp = SA.alt2temp(altitude, temp_units=temp_units, alt_units=alt_units)
+        else:
+            raise ValueError(
+                &quot;At least one of the temperature or altitude must be specified.&quot;
+            )
+
+    tas = mach * SA.temp2speed_of_sound(temp, temp_units, speed_units)
+
+    return tas
+</code></pre>
+
+<h2 id="interactive-mach-and-temperature-to-tas">interactive Mach and temperature to TAS</h2>
+<pre><code class="python">def i_mach2tas(data_items):
+&quot;&quot;&quot;
+Return the TAS that corresponds to a given Mach, altitude, and temperature
+using an interactive interface.
+&quot;&quot;&quot;
+
+    data_items[&quot;mach&quot;] = _get_mach(data_items)
+    mach = data_items[&quot;mach&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    data_items[&quot;temp_units&quot;] = _get_temp_units(data_items)
+    temp_units = data_items[&quot;temp_units&quot;]
+
+    data_items[&quot;temp&quot;] = _get_temp(data_items)
+    temp = data_items[&quot;temp&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    print()
+    print(&quot;Mach = &quot;, mach)
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print(&quot;Temperature =&quot;, temp, temp_units)
+    print()
+
+    tas = mach2tas(mach, temp, altitude, temp_units, alt_units, speed_units,)
+    data_items[&quot;tas&quot;] = tas
+    print(&quot;TAS = &quot;, tas, speed_units)
+</code></pre>
+
+<h2 id="tas-and-temperature-to-mach">TAS and temperature to Mach</h2>
+<pre><code class="python">def tas2mach(
+tas,
+temp=&quot;std&quot;,
+altitude=&quot;blank&quot;,
+temp_units=default_temp_units,
+alt_units=default_alt_units,
+speed_units=default_speed_units,
+):
+&quot;&quot;&quot;
+Return the mach number for a given TAS. The temperature or altitude
+must also be specified. If the altitude is specified, the temperature
+is assumed to be standard. If both the altitude and temperature are
+specified, the altitude input is ignored.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The altitude may be in feet ('ft'), metres ('m'), kilometres ('km'),
+    statute miles, ('sm') or nautical miles ('nm').
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    Examples:
+
+    Determine the mach number for a TAS of 500 kt at a temperature of
+    -15 deg C:
+    &gt;&gt;&gt; tas2mach(500, -15)
+    0.79859632148519943
+
+    Determine the mach number for a TAS of 500 kt at a temperature of
+    0 deg F:
+    &gt;&gt;&gt; tas2mach(500, 0, temp_units = 'F')
+    0.80292788758764277
+
+    Determine the mach number for a TAS of 500 kt at an altitude of
+    10,000 ft, assuming standard temperature:
+    &gt;&gt;&gt; tas2mach(500, altitude = 10000)
+    0.78328945665870209
+
+    Determine the mach number for a TAS of 400 mph at an altitude of
+    5000 m, assuming standard temperature:
+    &gt;&gt;&gt; tas2mach(400, altitude = 5000, speed_units = 'mph', alt_units = 'm')
+    0.55787687746166581
+    &quot;&quot;&quot;
+
+    if temp == &quot;std&quot;:
+        if altitude != &quot;blank&quot;:
+            temp = SA.alt2temp(altitude, temp_units=temp_units, alt_units=alt_units)
+        else:
+            raise ValueError(
+                &quot;At least one of the temperature or altitude must be specified.&quot;
+            )
+
+    mach = tas / SA.temp2speed_of_sound(temp, temp_units, speed_units)
+
+    return mach
+</code></pre>
+
+<h2 id="interactive-tas-and-temperature-to-mach">interactive TAS and temperature to Mach</h2>
+<pre><code class="python">def i_tas2mach(data_items):
+&quot;&quot;&quot;
+Return the mach that corresponds to a given TAS, altitude, and temperature
+using an interactive interface.
+&quot;&quot;&quot;
+
+    data_items[&quot;tas&quot;] = _get_TAS(data_items)
+    tas = data_items[&quot;tas&quot;]
+
+    data_items[&quot;speed_units&quot;] = _get_speed_units(data_items)
+    speed_units = data_items[&quot;speed_units&quot;]
+
+    data_items[&quot;altitude&quot;] = _get_alt(data_items)
+    altitude = data_items[&quot;altitude&quot;]
+
+    data_items[&quot;alt_units&quot;] = _get_alt_units(data_items)
+    alt_units = data_items[&quot;alt_units&quot;]
+
+    data_items[&quot;temp_units&quot;] = _get_temp_units(data_items)
+    temp_units = data_items[&quot;temp_units&quot;]
+
+    data_items[&quot;temp&quot;] = _get_temp(data_items)
+    temp = data_items[&quot;temp&quot;]
+
+    print()
+    print(&quot;TAS = &quot;, tas, speed_units)
+    print(&quot;Altitude = &quot;, altitude, alt_units)
+    print(&quot;Temperature =&quot;, temp, temp_units)
+    print()
+
+    mach = tas2mach(tas, temp, altitude, temp_units, alt_units, speed_units,)
+    data_items[&quot;mach&quot;] = mach
+    print(&quot;Mach = &quot;, mach)
+</code></pre>
+
+<h1 id="ram-temperature-rise-calculations">Ram temperature rise calculations</h1>
+<h2 id="mach-and-indicated-temperature-to-ambient-temperature">Mach and indicated temperature to ambient temperature</h2>
+<pre><code class="python">def mach2temp(
+mach, indicated_temp, recovery_factor, temp_units=default_temp_units,
+):
+&quot;&quot;&quot;
+Return the ambient temp, given the mach number, indicated
+temperature and the temperature probe's recovery factor.
+
+    The temperature may be in deg C, F, K or R.
+
+    If the units are not specified, the units in default_units.py are used.
+
+
+    Examples:
+
+    Determine the ambient temperature with an indicated temperature of
+    -20 deg C at mach 0.6 with a probe recovery factor of 0.8:
+
+    &gt;&gt;&gt; mach2temp(0.6, -20, 0.8)
+    -33.787291981845698
+
+    Determine the ambient temperature with an indicated temperature of
+    75 deg F at mach 0.3 with a probe recovery factor of 0.9:
+
+    &gt;&gt;&gt; mach2temp(0.3, 75, 0.9, temp_units = 'F')
+    66.476427868529839
+    &quot;&quot;&quot;
+
+    indicated_temp = U.temp_conv(indicated_temp, from_units=temp_units, to_units=&quot;K&quot;)
+    ambient_temp = indicated_temp / (1.0 + (0.2 * recovery_factor) * mach ** 2.0)
+
+    ambient_temp = U.temp_conv(ambient_temp, from_units=&quot;K&quot;, to_units=temp_units)
+
+    return ambient_temp
+</code></pre>
+
+<h2 id="tas-and-indicated-temperature-to-ambient-temperature">TAS and indicated temperature to ambient temperature</h2>
+<pre><code class="python">def tas2temp(
+tas,
+indicated_temp,
+recovery_factor,
+speed_units=default_speed_units,
+temp_units=default_temp_units,
+):
+&quot;&quot;&quot;
+Return the ambient temp, given the TAS, indicated temperature
+and the temperature probe's recovery factor.
+
+    The speed units may be 'kt', 'mph', 'km/h', 'm/s' and 'ft/s'.
+
+    The temperature may be in deg C, F, K or R. The temperature defaults to std
+    temperature if it is not input.
+
+    If the units are not specified, the units in default_units.py are used.
+
+    &quot;&quot;&quot;
+
+    indicated_temp = U.temp_conv(indicated_temp, from_units=temp_units, to_units=&quot;K&quot;)
+    tas = U.speed_conv(tas, from_units=speed_units, to_units=&quot;kt&quot;)
+
+    # value 7592.4732909142658 was adjusted to make the result equal that
+    # obtained using mach2temp
+
+    ambient_temp = indicated_temp - (recovery_factor * tas ** 2.0) / 7592.4732909142658
+
+    ambient_temp = U.temp_conv(ambient_temp, from_units=&quot;K&quot;, to_units=temp_units)
+
+    return ambient_temp
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>kevin01 -at- kilohotel.com</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Conversions - aerocalc</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">aerocalc</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../defaults/" class="nav-link">Defaults</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Conversions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../airspeed/" class="nav-link">Airspeed Calculations</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../license/" class="nav-link">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../defaults/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../airspeed/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/geoffreynyaga/aerocalc/edit/master/docs/conversions.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#area-conversion" class="nav-link">Area Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#density-conversion" class="nav-link">Density Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#force-conversion" class="nav-link">Force Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#length-conversion" class="nav-link">Length Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#power-conversion" class="nav-link">Power Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#pressure-conversion" class="nav-link">Pressure Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#speed-conversion" class="nav-link">Speed Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#temperature-conversion" class="nav-link">Temperature Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#volume-conversions" class="nav-link">Volume Conversions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#weight-conversion" class="nav-link">Weight Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#avgas-conversion" class="nav-link">AVGAS Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="area-conversion">Area Conversion</h2>
+<p>This module is used to convert areas between various units.</p>
+<blockquote>
+<p><code>Convert area values between ft**2, in**2, m**2, km**2, sm**2 and nm**2.</code></p>
+</blockquote>
+<pre><code class="python">def area_conv(Area, from_units=default_area_units, to_units=default_area_units):
+    &quot;&quot;&quot;
+    NOTE:  The incoming value is first converted to ft**2, then it is converted to
+           desired return value.
+    &quot;&quot;&quot;
+    ...
+    return converted area
+</code></pre>
+
+<p>NB: The units default to those specified in default_units.py</p>
+<h4 id="examples">Examples:</h4>
+<p><code>Convert 1 ft**2 to inches**2, with ft\*\*2 already defined as the default units:</code></p>
+<pre><code class="shell">&gt; area_conv(1, to_units = 'in**2')
+144.0
+</code></pre>
+
+<p><code>Convert 288 square inches to square feet, with ft**2 already defined as the default units:</code></p>
+<pre><code class="bash">&gt; area_conv(288, from_units = 'in\*\*2')
+2.0
+</code></pre>
+
+<p><code>Convert 10 square metres to square inches:</code></p>
+<pre><code class="bash">&gt; area_conv(1000, from_units = 'm**2', to_units = 'in**2')
+1550003.1000061999
+</code></pre>
+
+<h2 id="density-conversion">Density Conversion</h2>
+<p>This function is used to convert density values between e.g <code>kg/m**3, slug/ft**3 and lb/ft**3.</code></p>
+<pre><code class="python">def density_conv(Density, from_units, to_units):
+&quot;&quot;&quot;
+    The incoming value is first converted to kg/m**3, then it is converted
+    to desired return value.
+    &quot;&quot;&quot;
+    ...
+    return converted_density
+
+</code></pre>
+
+<blockquote>
+<h4 id="nb-there-are-no-default-units-both-the-from_units-and-the-to_units-must-be-specified">NB: There are <b><code>NO</code></b> default units. Both the from_units and the to_units <b><code>MUST</code></b> be specified.</h4>
+</blockquote>
+<p>Example:</p>
+<p><code>Convert 1.225 kg per metre cubed to lb per foot cubed:</code></p>
+<pre><code class="bash">&gt; density_conv(1.225, from_units = 'kg/m**3', to_units = 'lb/ft**3')
+0.076474253491112101
+</code></pre>
+
+<h2 id="force-conversion">Force Conversion</h2>
+<p>Convert force values between lb and N.</p>
+<pre><code class="python">def force_conv(Force, from_units=default_weight_units, to_units=default_weight_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to N, then it is converted to the
+    desired return value.
+    &quot;&quot;&quot;
+    ...
+    return converted_force
+
+</code></pre>
+
+<h2 id="length-conversion">Length Conversion</h2>
+<p><code>Convert length values between ft, in, m, km, sm and nm.</code></p>
+<pre><code class="python">def len_conv(L, from_units=default_length_units, to_units=default_length_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to ft, then it is converted to
+    desired return value.
+
+    The units default to those specified in default_units.py
+    &quot;&quot;&quot;
+    ...
+    return converted_length
+</code></pre>
+
+<h3 id="examples_1">Examples:</h3>
+<p><code>Convert 5280 ft to statute miles, with feet already defined as the default units:</code></p>
+<pre><code class="bash">&gt; len_conv(5280, to_units = 'sm')
+  1.0
+</code></pre>
+
+<p><code>Convert 1 nautical mile to feet, with feet already defined as the default units:</code></p>
+<pre><code class="bash">&gt; len_conv(1, from_units = 'nm')
+  6076.1154855643044
+</code></pre>
+
+<p><code>Convert 1000 metres to kilometres:</code></p>
+<pre><code class="bash">&gt; len_conv(1000, from_units = 'm', to_units = 'km')
+  0.99999999999999989
+</code></pre>
+
+<h2 id="power-conversion">Power Conversion</h2>
+<p><code>Convert power values between horsepower, ft-lb/mn, ft-lb/s, watts, kilowatts, BTU/hr and BTU/mn.</code></p>
+<pre><code class="python">def power_conv(P, from_units=default_power_units, to_units=default_power_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to hp, then it is converted to the
+    desired return value.
+    &quot;&quot;&quot;
+    ...
+    return converted_power
+</code></pre>
+
+<p><b>The units default to those specified in default_units.py</b></p>
+<h2 id="pressure-conversion">Pressure Conversion</h2>
+<p><code>Convert pressure values between inches of HG, mm of HG, psi, lb/ft^2, hpa and mb.</code></p>
+<pre><code class="python">def press_conv(P, from_units=default_press_units, to_units=default_press_units):
+    &quot;&quot;&quot;
+
+
+    The incoming value is first converted to Pa, then it is converted to
+    desired return value.
+    The units default to those specified in default_units.py
+
+    &quot;&quot;&quot;
+    ...
+    return converted_pressure
+</code></pre>
+
+<h3 id="examples_2">Examples:</h3>
+<p><code>Convert 1013.25 hpa to default pressure units:</code></p>
+<pre><code class="bash">&gt; press_conv(1013.25, from_units = 'hpa')
+29.921331923765198
+</code></pre>
+
+<p><code>Convert 29.9213 default pressure units to mm of HG:</code></p>
+<pre><code class="bash">&gt; press_conv(29.9213, to_units = 'mm HG')
+760.00128931459176
+</code></pre>
+
+<p><code>Convert 2116.22 lb per sq. ft to lb per sq. inch:</code></p>
+<pre><code class="bash">&gt; press_conv(2116.22, from_units = 'psf', to_units = 'psi')
+14.695973160069311
+</code></pre>
+
+<h2 id="speed-conversion">Speed Conversion</h2>
+<p><code>Convert speed values between kt, mph, km/h, m/s and ft/s.</code></p>
+<pre><code class="python">def speed_conv(S, from_units=default_speed_units, to_units=default_speed_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to kt, then it is converted to
+    desired return value.
+    The units default to those specified in default_units.py
+    &quot;&quot;&quot;
+    ...
+    return converted_speed
+</code></pre>
+
+<h3 id="example">Example:</h3>
+<p><code>Convert 230 mph to kt:</code></p>
+<pre><code class="bash">&gt; speed_conv(230, from_units = 'mph', to_units = 'kt')
+199.86453563714903
+</code></pre>
+
+<h2 id="temperature-conversion">Temperature Conversion</h2>
+<blockquote>
+<p>Converts absolute temperature values between deg C, F, K and R.</p>
+<p>NOTE: This function should <b>NOT</b> be used for relative temperature conversions,
+i.e. <code>temperature differences.</code></p>
+</blockquote>
+<pre><code class="python">def temp_conv(T, from_units=default_temp_units, to_units=default_temp_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to deg K, then it is converted to
+    desired return value.
+    The units default to those specified in default_units.py
+
+    &quot;&quot;&quot;
+    return converted_temperature
+</code></pre>
+
+<h3 id="examples_3">Examples:</h3>
+<p><code>Convert 32 deg F to deg C, with deg C as the default units:</code></p>
+<pre><code class="bash">&gt; temp_conv(32, from_units = 'F')
+&gt; 0.0
+</code></pre>
+
+<p><code>Convert 100 deg C to deg F, with deg C as the default units:</code></p>
+<pre><code class="bash">&gt; temp_conv(100, to_units = 'F')
+&gt; 212.0
+</code></pre>
+
+<p><code>Convert 59 deg F to deg K</code></p>
+<pre><code class="bash">&gt; temp_conv(59, from_units = 'F', to_units = 'K')
+&gt; 288.14999999999998
+</code></pre>
+
+<h2 id="volume-conversions">Volume Conversions</h2>
+<blockquote>
+<p><b><code>Convert volume values between USG, ImpGal (Imperial gallons), l (litres), ft**3, in**3, m**3, km**3, sm**3 and nm**3.</code></b></p>
+</blockquote>
+<pre><code class="python">def vol_conv(V, from_units=default_vol_units, to_units=default_vol_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to ft**3, then it is converted to
+    desired return value.
+
+    The units default to those specified in default_units.py
+
+    Examples:
+
+
+    &quot;&quot;&quot;
+    return converted_volume
+</code></pre>
+
+<p><code>Convert 1 cubic foot to US gallons, with cubic feet already defined as the default units:</code></p>
+<pre><code class="bash">&gt; vol_conv(1, to_units = 'USG')
+7.4805194804946105
+</code></pre>
+
+<p><code>Convert 1 Imperial gallon to cubic feet, with cubic feet already defined as the default units:</code></p>
+<pre><code class="shell">&gt; vol_conv(1, from_units = 'ImpGal')
+
+0.16054365323600001
+</code></pre>
+
+<p><code>Convert 10 US gallon to litres:</code></p>
+<pre><code class="bash">&gt; vol_conv(10, from_units = 'USG', to_units = 'l')
+37.854117840125852
+</code></pre>
+
+<h2 id="weight-conversion">Weight Conversion</h2>
+<blockquote>
+<p>Convert weight values between lb and kg.</p>
+<h3 id="purists-will-yell-that-lb-is-a-unit-of-weight-and-kg-is-a-unit-of-mass"><code>Purists will yell that lb is a unit of weight, and kg is a unit of mass.</code></h3>
+<h3 id="get-over-it"><code>Get over it!!!!!</code></h3>
+</blockquote>
+<pre><code class="python">def wt_conv(W, from_units=default_weight_units, to_units=default_weight_units):
+    &quot;&quot;&quot;
+    The incoming value is first converted to kg, then it is converted to the
+    desired return value.
+
+    The units default to those specified in default_units.py
+    &quot;&quot;&quot;
+    return converted_weight
+</code></pre>
+
+<h2 id="avgas-conversion">AVGAS Conversion</h2>
+<blockquote>
+<p>Convert aviation gasoline between units of lb, US Gallon (USG),
+Imperial Gallon (Imp Gal), litres (l) and kg, assuming nominal
+density for aviation gasoline of 6.01 lb per USG.</p>
+</blockquote>
+<pre><code>    Note: it was difficult to find authoritative values for aviation gasoline
+    density. Conventional wisdom is that aviation gasoline has a density of
+    6 lb/USG. The Canada Flight Supplement provides densities of:
+    temp density density density
+    (deg C) (lb/USG) (lb/ImpGal) (lb/l)
+    -40     6.41     7.68        1.69
+    -20     6.26     7.50        1.65
+    0       6.12     7.33        1.62
+    15      6.01     7.20        1.59
+    30      5.90     7.07        1.56
+
+    However, the Canada Flight Supplement does not provide a source for its
+    density data.  And, the values for the different volume units are not
+    completly consistent, as they don't vary by exactly the correct factor.
+    For example, if the density at 15 deg C is 6.01 lb/USG, we would expect
+    the density in lb/ImpGal to be 7.22, (given that 1 ImpGal = 1.201 USG)
+    yet the Canada Flight Supplement has 7.20.
+
+    The only authoritative source for aviation gasoline density that was
+    found on the web was the \&quot;Air BP Handbook of Products\&quot; on the British
+    Petroleum (BP) web site:
+
+    &lt;http://www.bp.com/liveassets/bp_internet/aviation/air_bp/STAGING/local_assets/downloads_pdfs/a/air_bp_products_handbook_04004_1.pdf&gt;
+
+    It provides the following density data valid at 15 deg C (the BP document
+    only provides density in kg/m**3 - the density in lb/USG were calculated
+    by Kevin Horton):
+
+    Avgas    density     density
+    Type    (kg/m**3)    (lb/USG)
+    80       690          5.76
+    100      695          5.80
+    100LL    715          5.97
+
+    The available aviation gasoline specifications do not appear to define an
+    allowable density range.  They do define allowable ranges for various
+    parametres of the distillation process - the density of the final product
+    will vary depending on where in the allowable range the refinery is run.
+    Thus there will be some variation in density from refinery to refinery.
+
+    This function uses the 15 deg C density values provided by BP, with the
+    variation with temperature provided in the Canada Flight Supplement.
+
+    The grade may be specified as \&quot;80\&quot;, \&quot;100\&quot; or \&quot;100LL\&quot;.  It defaults to
+    \&quot;100LL\&quot; if it is not specified.
+
+</code></pre>
+
+<pre><code class="python">def avgas_conv(
+AG,
+from_units=default_avgas_units,
+to_units=default_avgas_units,
+temp=15,
+temp_units=&quot;C&quot;,
+grade=&quot;nominal&quot;,
+):
+    &quot;&quot;&quot;
+    The units default to those specified in default_units.py
+    The temperature defaults to 15 deg C if it is not specified.
+    &quot;&quot;&quot;
+
+    return converted_avgas
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>kevin01 -at- kilohotel.com</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
