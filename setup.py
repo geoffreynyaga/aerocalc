@@ -17,7 +17,7 @@ from distutils.core import setup
 
 setup(
     name="AeroCalc",
-    version="0.11",
+    version="0.20",
     description="Aeronautical Engineering Calculations",
     long_description="""
                         AeroCalc is a pure python package that performs various aeronautical
