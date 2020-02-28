@@ -11,6 +11,18 @@
 > - standard atmosphere calculations and
 > - unit conversions.
 
+[Full Documentation ](https://romantic-poincare-327252.netlify.com)
+
+[GitHub Pages](https://geoffreynyaga.github.io/aerocalc/)
+
+## Table of Contents
+
+> [Airspeed Conversions Docs ↗️](docs/airspeed.md)
+
+> [Default Values Docs ↗️](docs/defaults.md)
+
+> [Physical Properties (density, pressure etc) Conversion Docs ↗️](docs/conversions.md)
+
 > ### Original aerocalc:
 >
 > For original documentation visit [kilohotel](https://kilohotel.com/python/aerocalc/.)
