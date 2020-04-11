@@ -12,7 +12,7 @@ setup(
                     """,
     author="Geoffrey Nyaga",
     author_email="geoffrey@geoffreynyaga.com",
-    url="https://geoffreynyaga.com/aerocalc3/",
+    url="https://aerocalc3.netlify.com",
     download_url="https://github.com/geoffreynyaga/aerocalc/archive/v_01.tar.gz",
     packages=["aerocalc3"],
     license="BSD",
