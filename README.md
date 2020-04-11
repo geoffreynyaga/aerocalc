@@ -15,6 +15,9 @@
 
 [Full Documentation ](https://aerocalc3.netlify.com)
 
+> - Homepage: https://aerocalc3.netlify.com
+> - pypi website: https://pypi.org/project/aerocalc3/
+
 [GitHub Pages](https://geoffreynyaga.github.io/aerocalc/)
 
 ## Table of Contents
@@ -28,9 +31,6 @@
 > ### Original aerocalc:
 >
 > For original documentation visit [kilohotel](https://kilohotel.com/python/aerocalc/.)
->
-> - Homepage: https://kilohotel.com/python/aerocalc/
-> - pypi website: https://pypi.python.org/pypi/AeroCalc/0.11
 
 ## Installation 📥
 
