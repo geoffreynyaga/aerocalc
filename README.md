@@ -2,7 +2,7 @@
 
 > #### AeroCalc Aeronautical Engineering Calculations
 >
-> AeroCalc is a pure python package that performs various aeronautical engineering calculations.
+> AeroCalc is a python utility package that performs various aeronautical engineering calculations.
 >
 > Currently it provides:
 >
@@ -46,7 +46,7 @@ python setup.py install
 
 ## Project layout
 
-```
+```bash
     .
     ├── aerocalc # Source code folder.
     │   └── tests

@@ -1073,7 +1073,7 @@ def density_alt_table(
         for line in line_buffer:
             OUT.write(line + "\n")
 
-        print("file selected")
+        # print("file selected")
     else:
         return "\n".join(line_buffer)
 

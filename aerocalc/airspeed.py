@@ -542,15 +542,15 @@ def i_cas2eas(data_items):
     data_items["alt_units"] = _get_alt_units(data_items)
     alt_units = data_items["alt_units"]
 
-    print()
-    print("CAS = ", cas, speed_units)
-    print("Altitude = ", altitude, alt_units)
-    print()
+    # print()
+    # print("CAS = ", cas, speed_units)
+    # print("Altitude = ", altitude, alt_units)
+    # print()
 
     eas = cas2eas(cas, altitude, speed_units, alt_units)
     data_items["eas"] = eas
     return_string = "EAS = " + str(eas) + " " + speed_units
-    print(return_string)
+    # print(return_string)
 
 
 def cas2tas(

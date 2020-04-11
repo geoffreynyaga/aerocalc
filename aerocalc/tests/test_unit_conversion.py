@@ -63,13 +63,13 @@ class Test_density_conv(unittest.TestCase):
     def test_01(self):
         Value = U.density_conv(1, from_units="kg/m**3", to_units="slug/ft**3")
         Truth = (3.6127292e-5 * 12 ** 3) / 32.174
-        print((Value, Truth))
+        # print((Value, Truth))
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
     def test_02(self):
         Value = U.density_conv(1, from_units="slug/ft**3", to_units="lb/ft**3")
         Truth = 32.174
-        print((Value, Truth))
+        # print((Value, Truth))
         self.assertTrue(RE(Value, Truth) <= 1e-5)
 
 

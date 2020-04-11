@@ -1,23 +1,8 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-# #############################################################################
-#
-# Distribution Notes
-#
-# HTML docs are created with epydoc, via
-# "cd /Users/kwh/sw_projects/hg/python/AeroCalc_Package"
-# "epydoc --no-private -n AeroCalc -u 'http://www.kilohotel.com/python/aerocalc/' aerocalc"
-#
-# Generate distribution - "python setup.py sdist"
-#
-# #############################################################################
-
 from distutils.core import setup
 
 setup(
-    name="AeroCalc",
-    version="0.20",
+    name="aerocalc",
+    version="0.10",
     description="Aeronautical Engineering Calculations",
     long_description="""
                         AeroCalc is a pure python package that performs various aeronautical
@@ -25,9 +10,10 @@ setup(
                         standard atmosphere calculations, static source error correction calculations
                         and unit conversions.
                     """,
-    author="Kevin Horton",
-    author_email="kevin01@kilohotel.com",
-    url="http://www.kilohotel.com/python/aerocalc",
+    author="Geoffrey Nyaga",
+    author_email="geoffrey@geoffreynyaga.com",
+    url="https://geoffreynyaga.com/aerocalc/",
+    download_url="https://github.com/geoffreynyaga/aerocalc/archive/v_01.tar.gz",
     packages=["aerocalc"],
     license="BSD",
     classifiers=[

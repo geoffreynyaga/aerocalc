@@ -268,12 +268,12 @@ def get_input2(
                         if debug:
                             print("Test of ", condition[0], "failed")
                         validated_all = False
-                        print(condition[1])
+                        # print(condition[1])
                 except:
                     if debug:
                         print("Exception during test")
                     validated_all = False
-                    print(condition[1])
+                    # print(condition[1])
 
         if not validated_any:
             print(error_string, "\n")
