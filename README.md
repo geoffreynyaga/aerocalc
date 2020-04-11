@@ -111,7 +111,7 @@ pytest
 The testing results will be displayed and there will also be a `htmlcov` folder generated inside the project that will contain the code coverage details.
 
 <pre>
-├── aerocalc
+├── aerocalc3
 │   ├── __pycache__
 │   └── test
 ├──  <b>htmlcov</b>

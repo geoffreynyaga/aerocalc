@@ -1,9 +1,11 @@
-# Welcome to aerocalc ✈️🧮 documentation
+# Welcome to aerocalc3 ✈️🧮 documentation
 
-> #### AeroCalc Aeronautical Engineering Calculations
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fb968472-9209-45c9-a9e6-dfc8fc8bc92d/deploy-status)](https://app.netlify.com/sites/aerocalc3/deploys)
+
+> #### aerocalc3 Aeronautical Engineering Calculations
 >
-> AeroCalc is a python utility package that performs various aeronautical engineering calculations.
-
+> aerocalc3 is a python utility package that performs various aeronautical engineering calculations.
+>
 > Currently it provides:
 >
 > - airspeed conversions,
@@ -11,7 +13,10 @@
 > - standard atmosphere calculations and
 > - unit conversions.
 
-[Full Documentation ](https://romantic-poincare-327252.netlify.com)
+[Full Documentation ](https://aerocalc3.netlify.com)
+
+> - Homepage: https://aerocalc3.netlify.com
+> - pypi website: https://pypi.org/project/aerocalc3/
 
 [GitHub Pages](https://geoffreynyaga.github.io/aerocalc/)
 
@@ -26,16 +31,19 @@
 > ### Original aerocalc:
 >
 > For original documentation visit [kilohotel](https://kilohotel.com/python/aerocalc/.)
->
-> - Homepage: https://kilohotel.com/python/aerocalc/
-> - pypi website: https://pypi.python.org/pypi/AeroCalc/0.11
 
 ## Installation 📥
 
-Download the files https://github.com/chengdi123000/aerocalc/archive/v0.11-py3.tar.gz, decompress it and use `setup.py` to install.
+```bash
+pip install aerocalc3==0.10
+```
+
+#### Alternatively:
+
+Download the files `https://github.com/geoffreynyaga/aerocalc/archive/v_01.tar.gz`, decompress it and use `setup.py` to install.
 
 ```bash
-wget https://github.com/chengdi123000/aerocalc/archive/v0.11-py3.tar.gz
+wget https://github.com/geoffreynyaga/aerocalc/archive/v_01.tar.gz
 
 tar xf v0.11-py3.tar.gz
 
@@ -103,7 +111,7 @@ pytest
 The testing results will be displayed and there will also be a `htmlcov` folder generated inside the project that will contain the code coverage details.
 
 <pre>
-├── aerocalc
+├── aerocalc3
 │   ├── __pycache__
 │   └── test
 ├──  <b>htmlcov</b>
